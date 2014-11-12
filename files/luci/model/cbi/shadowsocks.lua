@@ -4,8 +4,8 @@ openwrt-dist
 
 local fs = require "nixio.fs"
 
-local ssredir =(luci.sys.call("pidof ss-redir > /dev/null") == 0)
-if ssredir then
+local running =(luci.sys.call("pidof ss-redir > /dev/null") == 0)
+if running then
 	m = Map("shadowsocks", translate("ShadowSocks"), translate("ShadowSocks is running"))
 else
 	m = Map("shadowsocks", translate("ShadowSocks"), translate("ShadowSocks is not running"))
