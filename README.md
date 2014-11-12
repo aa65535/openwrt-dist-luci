@@ -1,6 +1,13 @@
 OpenWrt-dist LuCI
 ===
 
+APP 列表
+---
+
+ Name                         | Description
+ -----------------------------|-------------------------------------------------
+ luci-app-shadowsocks-spec    | LuCI configuration pages for shadowsocks-libev-spec
+
 
 相关项目
 ---
