@@ -12,12 +12,11 @@ define Package/openwrt-dist-luci/Default
 	SECTION:=luci
 	CATEGORY:=LuCI
 	SUBMENU:=3. Applications
-	VARIANT:=$(1)
-	TITLE:=$(2) for LuCI
+	TITLE:=$(1) for LuCI
 	PKGARCH:=all
 endef
 
-Package/luci-app-shadowsocks-spec = $(call Package/openwrt-dist-luci/Default,shadowsocks-spec,shadowsocks-libev-spec)
+Package/luci-app-shadowsocks-spec = $(call Package/openwrt-dist-luci/Default,shadowsocks-libev-spec)
 
 define Package/openwrt-dist-luci/description
 	This package contains LuCI configuration pages for $(1).
@@ -48,12 +47,12 @@ Package/luci-app-shadowsocks-spec/postinst = $(call Package/openwrt-dist-luci/po
 
 define Package/openwrt-dist-luci/install
 	$(INSTALL_DIR) $(1)/usr/lib/lua/luci/controller
-	$(INSTALL_DIR) $(1)/usr/lib/lua/luci/i18n
-	$(INSTALL_DIR) $(1)/usr/lib/lua/luci/model/cbi
-	$(INSTALL_DIR) $(1)/etc/uci-defaults
 	$(INSTALL_DATA) ./files/luci/controller/$(2).lua $(1)/usr/lib/lua/luci/controller/$(2).lua
+	$(INSTALL_DIR) $(1)/usr/lib/lua/luci/i18n
 	$(INSTALL_DATA) ./files/luci/i18n/$(2).zh-cn.lmo $(1)/usr/lib/lua/luci/i18n/$(2).zh-cn.lmo
+	$(INSTALL_DIR) $(1)/usr/lib/lua/luci/model/cbi
 	$(INSTALL_DATA) ./files/luci/model/cbi/$(2).lua $(1)/usr/lib/lua/luci/model/cbi/$(2).lua
+	$(INSTALL_DIR) $(1)/etc/uci-defaults
 	$(INSTALL_BIN) ./files/root/etc/uci-defaults/luci-$(2) $(1)/etc/uci-defaults/luci-$(2)
 endef
 
