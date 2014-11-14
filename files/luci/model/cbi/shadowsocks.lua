@@ -2,108 +2,114 @@
 openwrt-dist
 ]]--
 
-local fs = require "nixio.fs"
+local m, s, o, e, r
 
-local running =(luci.sys.call("pidof ss-redir > /dev/null") == 0)
-if running then
+r =(luci.sys.call("pidof ss-redir > /dev/null") == 0)
+if r then
 	m = Map("shadowsocks", translate("ShadowSocks"), translate("ShadowSocks is running"))
 else
 	m = Map("shadowsocks", translate("ShadowSocks"), translate("ShadowSocks is not running"))
 end
 
-general = m:section(TypedSection, "shadowsocks", translate("General Setting"))
-general.anonymous = true
+s = m:section(TypedSection, "shadowsocks", translate("General Setting"))
+s.anonymous = true
 
-enable = general:option(Flag, "enable", translate("Enable"))
-enable.default = 1
-enable.rmempty = false
+o = s:option(Flag, "enable", translate("Enable"))
+o.default = 1
+o.rmempty = false
 
-use_conf_file = general:option(Flag, "use_conf_file", translate("Use Config File"))
-use_conf_file.default = 1
-use_conf_file.rmempty = false
+o = s:option(Flag, "use_conf_file", translate("Use Config File"))
+o.default = 1
+o.rmempty = false
 
-config_file = general:option(Value, "config_file", translate("Config File"))
-config_file.placeholder = "/etc/shadowsocks/config.json"
-config_file.datatype = "file"
-config_file:depends("use_conf_file", 1)
+o = s:option(Value, "config_file", translate("Config File"))
+o.placeholder = "/etc/shadowsocks/config.json"
+o.datatype = "file"
+o:depends("use_conf_file", 1)
 
-server = general:option(Value, "server", translate("Server Address"))
-server.datatype = "host"
-server:depends("use_conf_file", "")
+o = s:option(Value, "server", translate("Server Address"))
+o.datatype = "host"
+o:depends("use_conf_file", "")
 
-server_port = general:option(Value, "server_port", translate("Server Port"))
-server_port.datatype = "port"
-server_port:depends("use_conf_file", "")
+o = s:option(Value, "server_port", translate("Server Port"))
+o.datatype = "port"
+o:depends("use_conf_file", "")
 
-local_port = general:option(Value, "local_port", translate("Local Port"))
-local_port.datatype = "port"
-local_port.placeholder = 1080
-local_port:depends("use_conf_file", "")
+o = s:option(Value, "local_port", translate("Local Port"))
+o.datatype = "port"
+o.placeholder = 1080
+o:depends("use_conf_file", "")
 
-password = general:option(Value, "password", translate("Password"))
-password.password = true
-password:depends("use_conf_file", "")
+o = s:option(Value, "password", translate("Password"))
+o.password = true
+o:depends("use_conf_file", "")
 
-encrypt_method = general:option(ListValue, "encrypt_method", translate("Encrypt Method"))
-encrypt_method:value("table")
-encrypt_method:value("rc4")
-encrypt_method:value("rc4-md5")
-encrypt_method:value("aes-128-cfb")
-encrypt_method:value("aes-192-cfb")
-encrypt_method:value("aes-256-cfb")
-encrypt_method:value("bf-cfb")
-encrypt_method:value("cast5-cfb")
-encrypt_method:value("des-cfb")
-encrypt_method:value("camellia-128-cfb")
-encrypt_method:value("camellia-192-cfb")
-encrypt_method:value("camellia-256-cfb")
-encrypt_method:value("idea-cfb")
-encrypt_method:value("rc2-cfb")
-encrypt_method:value("seed-cfb")
-encrypt_method:depends("use_conf_file", "")
+e = {
+	"table",
+	"rc4",
+	"rc4-md5",
+	"aes-128-cfb",
+	"aes-192-cfb",
+	"aes-256-cfb",
+	"bf-cfb",
+	"camellia-128-cfb",
+	"camellia-192-cfb",
+	"camellia-256-cfb",
+	"cast5-cfb",
+	"des-cfb",
+	"idea-cfb",
+	"rc2-cfb",
+	"seed-cfb",
+}
 
-ignore_list = general:option(Value, "ignore_list", translate("Ignore IP List"))
-ignore_list.placeholder = "/etc/shadowsocks/ignore.list"
-ignore_list.datatype = "file"
+o = s:option(ListValue, "encrypt_method", translate("Encrypt Method"))
+for i,v in ipairs(e) do
+	o:value(v)
+end
+o:depends("use_conf_file", "")
+
+o = s:option(Value, "ignore_list", translate("Ignore IP List"))
+o.placeholder = "/etc/shadowsocks/ignore.list"
+o.datatype = "file"
 
 
-tunnel = m:section(TypedSection, "shadowsocks", translate("UDP Forward"))
-tunnel.anonymous = true
+s = m:section(TypedSection, "shadowsocks", translate("UDP Forward"))
+s.anonymous = true
 
-tunnel_enable = tunnel:option(Flag, "tunnel_enable", translate("Enable"))
-tunnel_enable.default = 1
-tunnel_enable.rmempty = false
+o = s:option(Flag, "tunnel_enable", translate("Enable"))
+o.default = 1
+o.rmempty = false
 
-tunnel_port = tunnel:option(Value, "tunnel_port", translate("UDP Local Port"))
-tunnel_port.datatype = "port"
-tunnel_port.placeholder = 5353
+o = s:option(Value, "tunnel_port", translate("UDP Local Port"))
+o.datatype = "port"
+o.placeholder = 5353
 
-tunnel_forward = tunnel:option(Value, "tunnel_forward",
+o = s:option(Value, "tunnel_forward",
 	translate("Forwarding Tunnel"),
 	translate("Setup a local port forwarding tunnel"))
-tunnel_forward.placeholder = "8.8.4.4:53"
+o.placeholder = "8.8.4.4:53"
 
 
-ac = m:section(TypedSection, "shadowsocks", translate("Access Control"))
-ac.anonymous = true
+s = m:section(TypedSection, "shadowsocks", translate("Access Control"))
+s.anonymous = true
 
-ac_mode = ac:option(ListValue, "ac_mode", translate("Access Control Mode"))
-ac_mode:value("0", translate("Off"))
-ac_mode:value("1", translate("Accept"))
-ac_mode:value("2", translate("Reject"))
-ac_mode.default = 0
-ac_mode.rmempty = false
+o = s:option(ListValue, "ac_mode", translate("Access Control Mode"))
+o:value("0", translate("Off"))
+o:value("1", translate("Accept"))
+o:value("2", translate("Reject"))
+o.default = 0
+o.rmempty = false
 
-accept_ip = ac:option(DynamicList, "accept_ip",
+o = s:option(DynamicList, "accept_ip",
 	translate("Accept IP"),
 	translate("The traffic of these IP will be transited through shadowsocks"))
-accept_ip.datatype = "ipaddr"
-accept_ip:depends("ac_mode", 1)
+o.datatype = "ipaddr"
+o:depends("ac_mode", 1)
 
-reject_ip = ac:option(Value, "reject_ip",
+o = s:option(Value, "reject_ip",
 	translate("Reject IP"),
 	translate("The traffic of this IP won't be transited through shadowsocks"))
-reject_ip.datatype = "ipaddr"
-reject_ip:depends("ac_mode", 2)
+o.datatype = "ipaddr"
+o:depends("ac_mode", 2)
 
 return m
