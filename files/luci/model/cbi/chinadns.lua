@@ -33,8 +33,8 @@ o.datatype = "port"
 o.rmempty = false
 
 o = s:option(Value, "server",
-	translate("DNS Server"),
-	translate("Use commas to separate"))
+	translate("Upstream Servers"),
+	translate("Use commas to separate multiple ip address"))
 o.placeholder = "114.114.114.114,208.67.222.222:443,8.8.8.8"
 
 return m

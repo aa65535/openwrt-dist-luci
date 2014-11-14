@@ -11,7 +11,7 @@ msgid "ChinaDNS is not running"
 msgstr "ChinaDNS 未运行"
 
 msgid "General Setting"
-msgstr "基本设置"
+msgstr "全局设置"
 
 msgid "Enable"
 msgstr "启用"
@@ -25,8 +25,8 @@ msgstr "Chnroute 文件"
 msgid "Local Port"
 msgstr "本地端口"
 
-msgid "DNS Server"
-msgstr "DNS 服务器"
+msgid "Upstream Servers"
+msgstr "上游服务器"
 
-msgid "Use commas to separate"
-msgstr "使用逗号分隔"
+msgid "Use commas to separate multiple ip address"
+msgstr "多个 IP 地址使用逗号隔开"
