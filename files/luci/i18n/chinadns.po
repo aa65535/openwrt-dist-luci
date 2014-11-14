@@ -1,0 +1,32 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8\n"
+
+msgid "ChinaDNS"
+msgstr "ChinaDNS"
+
+msgid "ChinaDNS is running"
+msgstr "ChinaDNS 运行中"
+
+msgid "ChinaDNS is not running"
+msgstr "ChinaDNS 未运行"
+
+msgid "General Setting"
+msgstr "基本设置"
+
+msgid "Enable"
+msgstr "启用"
+
+msgid "Fake IP List"
+msgstr "虚假 IP 列表"
+
+msgid "Chnroute File"
+msgstr "Chnroute 文件"
+
+msgid "Local Port"
+msgstr "本地端口"
+
+msgid "DNS Server"
+msgstr "DNS 服务器"
+
+msgid "使用逗号分隔"
+msgstr "加密方式"

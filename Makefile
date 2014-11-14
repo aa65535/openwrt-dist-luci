@@ -2,7 +2,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=openwrt-dist-luci
 PKG_VERSION=1.0.0
-PKG_RELEASE:=1
+PKG_RELEASE:=2
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)
 
@@ -16,12 +16,14 @@ define Package/openwrt-dist-luci/Default
 	PKGARCH:=all
 endef
 
+Package/luci-app-chinadns-c = $(call Package/openwrt-dist-luci/Default,ChinaDNS-C)
 Package/luci-app-shadowsocks-spec = $(call Package/openwrt-dist-luci/Default,shadowsocks-libev-spec)
 
 define Package/openwrt-dist-luci/description
 	This package contains LuCI configuration pages for $(1).
 endef
 
+Package/luci-app-chinadns-c/description = $(call Package/openwrt-dist-luci/description,ChinaDNS-C)
 Package/luci-app-shadowsocks-spec/description = $(call Package/openwrt-dist-luci/description,shadowsocks-libev-spec)
 
 define Build/Prepare
@@ -43,6 +45,7 @@ fi
 exit 0
 endef
 
+Package/luci-app-chinadns-c/postinst = $(call Package/openwrt-dist-luci/postinst,chinadns)
 Package/luci-app-shadowsocks-spec/postinst = $(call Package/openwrt-dist-luci/postinst,shadowsocks)
 
 define Package/openwrt-dist-luci/install
@@ -56,6 +59,8 @@ define Package/openwrt-dist-luci/install
 	$(INSTALL_BIN) ./files/root/etc/uci-defaults/luci-$(2) $(1)/etc/uci-defaults/luci-$(2)
 endef
 
+Package/luci-app-chinadns-c/install = $(call Package/openwrt-dist-luci/install,$(1),chinadns)
 Package/luci-app-shadowsocks-spec/install = $(call Package/openwrt-dist-luci/install,$(1),shadowsocks)
 
+$(eval $(call BuildPackage,luci-app-chinadns-c))
 $(eval $(call BuildPackage,luci-app-shadowsocks-spec))
