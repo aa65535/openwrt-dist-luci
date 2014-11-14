@@ -28,5 +28,5 @@ msgstr "本地端口"
 msgid "DNS Server"
 msgstr "DNS 服务器"
 
-msgid "使用逗号分隔"
-msgstr "加密方式"
+msgid "Use commas to separate"
+msgstr "使用逗号分隔"
