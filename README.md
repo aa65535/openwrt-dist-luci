@@ -6,6 +6,7 @@ APP 列表
 
  Name                           | Description
  -------------------------------|-----------------------------------------------
+ [luci-app-chinadns-c][1]       | LuCI configuration pages for ChinaDNS-C
  [luci-app-shadowsocks-spec][0] | LuCI configuration pages for shadowsocks-libev-spec
 
 编译说明
@@ -37,6 +38,7 @@ APP 列表
 
 
   [0]: https://sourceforge.net/projects/openwrt-dist/files/luci-app/shadowsocks-spec/
+  [1]: https://sourceforge.net/projects/openwrt-dist/files/luci-app/chinadns-c/
   [5]: https://github.com/aa65535/openwrt-chinadns
   [6]: https://github.com/aa65535/openwrt-dnsmasq
   [7]: https://github.com/aa65535/openwrt-shadowsocks
