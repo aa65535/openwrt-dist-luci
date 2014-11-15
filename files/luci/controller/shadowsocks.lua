@@ -1,5 +1,5 @@
 --[[
-openwrt-dist
+openwrt-dist-luci: ShadowSocks
 ]]--
 
 module("luci.controller.shadowsocks", package.seeall)

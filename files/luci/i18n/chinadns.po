@@ -11,7 +11,7 @@ msgid "ChinaDNS is not running"
 msgstr "ChinaDNS 未运行"
 
 msgid "General Setting"
-msgstr "全局设置"
+msgstr "基本设置"
 
 msgid "Enable"
 msgstr "启用"

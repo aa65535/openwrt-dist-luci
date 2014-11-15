@@ -1,11 +1,10 @@
 --[[
-openwrt-dist
+openwrt-dist-luci: ChinaDNS
 ]]--
 
-local m, s, o, r
+local m, s, o
 
-r =(luci.sys.call("pidof chinadns > /dev/null") == 0)
-if r then
+if luci.sys.call("pidof chinadns >/dev/null") == 0 then
 	m = Map("chinadns", translate("ChinaDNS"), translate("ChinaDNS is running"))
 else
 	m = Map("chinadns", translate("ChinaDNS"), translate("ChinaDNS is not running"))

@@ -10,7 +10,7 @@ msgstr "ShadowSocks 运行中"
 msgid "ShadowSocks is not running"
 msgstr "ShadowSocks 未运行"
 
-msgid "General Setting"
+msgid "Global Setting"
 msgstr "全局设置"
 
 msgid "Enable"

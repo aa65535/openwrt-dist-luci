@@ -1,5 +1,5 @@
 --[[
-openwrt-dist
+openwrt-dist-luci: ChinaDNS
 ]]--
 
 module("luci.controller.chinadns", package.seeall)

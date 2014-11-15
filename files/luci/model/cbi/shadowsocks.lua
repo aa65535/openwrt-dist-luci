@@ -1,17 +1,17 @@
 --[[
-openwrt-dist
+openwrt-dist-luci: ShadowSocks
 ]]--
 
-local m, s, o, e, r
+local m, s, o, e
 
-r =(luci.sys.call("pidof ss-redir > /dev/null") == 0)
-if r then
+if luci.sys.call("pidof ss-redir >/dev/null") == 0 then
 	m = Map("shadowsocks", translate("ShadowSocks"), translate("ShadowSocks is running"))
 else
 	m = Map("shadowsocks", translate("ShadowSocks"), translate("ShadowSocks is not running"))
 end
 
-s = m:section(TypedSection, "shadowsocks", translate("General Setting"))
+-- Global Setting
+s = m:section(TypedSection, "shadowsocks", translate("Global Setting"))
 s.anonymous = true
 
 o = s:option(Flag, "enable", translate("Enable"))
@@ -72,7 +72,7 @@ o = s:option(Value, "ignore_list", translate("Ignore IP List"))
 o.placeholder = "/etc/shadowsocks/ignore.list"
 o.datatype = "file"
 
-
+-- UDP Forward
 s = m:section(TypedSection, "shadowsocks", translate("UDP Forward"))
 s.anonymous = true
 
@@ -89,7 +89,7 @@ o = s:option(Value, "tunnel_forward",
 	translate("Setup a local port forwarding tunnel"))
 o.placeholder = "8.8.4.4:53"
 
-
+-- Access Control
 s = m:section(TypedSection, "shadowsocks", translate("Access Control"))
 s.anonymous = true
 
