@@ -1,0 +1,53 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8\n"
+
+msgid "ShadowVPN"
+msgstr "ShadowVPN"
+
+msgid "ShadowVPN is running"
+msgstr "ShadowVPN 运行中"
+
+msgid "ShadowVPN is not running"
+msgstr "ShadowVPN 未运行"
+
+msgid "Common Configuration"
+msgstr "一般设置"
+
+msgid "General Setting"
+msgstr "基本设置"
+
+msgid "Enable"
+msgstr "启用"
+
+msgid "Server Address"
+msgstr "服务器地址"
+
+msgid "Server Port"
+msgstr "服务器端口"
+
+msgid "Password"
+msgstr "密码"
+
+msgid "Override MTU"
+msgstr "设置MTU"
+
+msgid "Interface Name"
+msgstr "接口名称"
+
+msgid "Edit Configuration Template"
+msgstr "编辑配置模板"
+
+msgid "Edit Up Script"
+msgstr "编辑启动脚本"
+
+msgid "Edit Down Script"
+msgstr "编辑退出脚本"
+
+msgid "This is the content of the file '/etc/shadowvpn/client.conf' from which your ShadowVPN configuration will be generated. Values enclosed by pipe symbols ('|') should not be changed. They get their values from the 'General Setting' tab."
+msgstr "这是文件 '/etc/shadowvpn/client.conf' 的内容，ShadowVPN 的配置将用它生成。使用管符号('|')包围的值不应被修改。它们将从“一般设置”选项卡取值。"
+
+msgid "This is the content of the file '/etc/shadowvpn/client_up.sh'. The script to run after VPN is created."
+msgstr "这是文件 '/etc/shadowvpn/client_up.sh' 的内容。此脚本会在 VPN 建立后执行。"
+
+msgid "This is the content of the file '/etc/shadowvpn/client_down.sh'. The script to run before stopping VPN."
+msgstr "这是文件 '/etc/shadowvpn/client_down.sh' 的内容。此脚本会在 VPN 停止后执行。"
