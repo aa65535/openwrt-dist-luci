@@ -38,9 +38,9 @@ APP 列表
  [openwrt-shadowvpn][8]   | OpenWrt's ShadowVPN Makefile
 
 
-  [0]: https://sourceforge.net/projects/openwrt-dist/files/luci-app/shadowsocks-spec/
-  [1]: https://sourceforge.net/projects/openwrt-dist/files/luci-app/chinadns-c/
-  [1]: https://sourceforge.net/projects/openwrt-dist/files/luci-app/shadowvpn/
+  [0]: http://sourceforge.net/projects/openwrt-dist/files/luci-app/shadowsocks-spec/
+  [1]: http://sourceforge.net/projects/openwrt-dist/files/luci-app/chinadns-c/
+  [2]: http://sourceforge.net/projects/openwrt-dist/files/luci-app/shadowvpn/
   [5]: https://github.com/aa65535/openwrt-chinadns
   [6]: https://github.com/aa65535/openwrt-dnsmasq
   [7]: https://github.com/aa65535/openwrt-shadowsocks
