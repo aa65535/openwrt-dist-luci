@@ -22,12 +22,10 @@ o.default = 1
 o.rmempty = false
 
 o = s:taboption("general", Value, "server", translate("Server Address"))
-o.placeholder = "127.0.0.1"
 o.datatype = "host"
 o.rmempty = false
 
 o = s:taboption("general", Value, "port", translate("Server Port"))
-o.placeholder = "4000"
 o.datatype = "port"
 o.rmempty = false
 
@@ -37,11 +35,13 @@ o.rmempty = false
 
 o = s:taboption("general", Value, "mtu", translate("Override MTU"))
 o.placeholder = 1440
+o.default = 1440
 o.datatype = "range(296,1500)"
 o.rmempty = false
 
 o = s:taboption("general", Value, "intf", translate("Interface Name"))
 o.placeholder = "tun0"
+o.default = "tun0"
 o.rmempty = false
 
 -- Edit Configuration Template
@@ -68,7 +68,7 @@ s:tab("edit_up", translate("Edit Up Script"))
 
 o = s:taboption("edit_up", TextValue, "_up", translate(""),
 	translate("This is the content of the file '/etc/shadowvpn/client_up.sh'. " ..
-		"The script to run after VPN is created."))
+		"The script to run after VPN is created. Before you modify it needs to stop the VPN service."))
 o.template = "cbi/tvalue"
 o.rows = 20
 
@@ -87,7 +87,7 @@ s:tab("edit_down", translate("Edit Down Script"))
 
 o = s:taboption("edit_down", TextValue, "_down", translate(""),
 	translate("This is the content of the file '/etc/shadowvpn/client_down.sh'. " ..
-		"The script to run before stopping VPN."))
+		"The script to run before stopping VPN. Before you modify it needs to stop the VPN service."))
 o.template = "cbi/tvalue"
 o.rows = 20
 

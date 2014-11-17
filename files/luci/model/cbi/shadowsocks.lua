@@ -24,6 +24,7 @@ o.rmempty = false
 
 o = s:option(Value, "config_file", translate("Config File"))
 o.placeholder = "/etc/shadowsocks/config.json"
+o.default = "/etc/shadowsocks/config.json"
 o.datatype = "file"
 o:depends("use_conf_file", 1)
 
@@ -38,6 +39,7 @@ o:depends("use_conf_file", "")
 o = s:option(Value, "local_port", translate("Local Port"))
 o.datatype = "port"
 o.placeholder = 1080
+o.default = 1080
 o:depends("use_conf_file", "")
 
 o = s:option(Value, "password", translate("Password"))
@@ -82,11 +84,13 @@ o.rmempty = false
 
 o = s:option(Value, "tunnel_port", translate("UDP Local Port"))
 o.datatype = "port"
+o.default = 5353
 o.placeholder = 5353
 
 o = s:option(Value, "tunnel_forward",
 	translate("Forwarding Tunnel"),
 	translate("Setup a local port forwarding tunnel"))
+o.default = "8.8.4.4:53"
 o.placeholder = "8.8.4.4:53"
 
 -- Access Control
