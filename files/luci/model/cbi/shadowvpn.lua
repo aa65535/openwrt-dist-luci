@@ -11,6 +11,7 @@ else
 	m = Map("shadowvpn", translate("ShadowVPN"), translate("ShadowVPN is not running"))
 end
 
+-- Common Configuration
 s = m:section(TypedSection, "shadowvpn", translate("Common Configuration"))
 s.anonymous = true
 
@@ -63,42 +64,20 @@ function o.write(self, section, value)
 	end
 end
 
--- Edit Up Script
-s:tab("edit_up", translate("Edit Up Script"))
+-- Route Configuration
+s = m:section(TypedSection, "shadowvpn", translate("Routing Configuration"))
+s.anonymous = true
 
-o = s:taboption("edit_up", TextValue, "_up", translate(""),
-	translate("This is the content of the file '/etc/shadowvpn/client_up.sh'. " ..
-		"The script to run after VPN is created. Before you modify it needs to stop the VPN service."))
-o.template = "cbi/tvalue"
-o.rows = 20
+o = s:option(ListValue, "route_mode", translate("Routing Mode"))
+o:value("0", translate("Global Mode"))
+o:value("1", translate("Domestic Routes"))
+o:value("2", translate("Foreign Routes"))
+o.default = 0
+o.rmempty = false
 
-function o.cfgvalue(self, section)
-	return fs.readfile("/etc/shadowvpn/client_up.sh") or ""
-end
-
-function o.write(self, section, value)
-	if value then
-		fs.writefile("/etc/shadowvpn/client_up.sh", value:gsub("\r\n?", "\n"))
-	end
-end
-
--- Edit Down Script
-s:tab("edit_down", translate("Edit Down Script"))
-
-o = s:taboption("edit_down", TextValue, "_down", translate(""),
-	translate("This is the content of the file '/etc/shadowvpn/client_down.sh'. " ..
-		"The script to run before stopping VPN. Before you modify it needs to stop the VPN service."))
-o.template = "cbi/tvalue"
-o.rows = 20
-
-function o.cfgvalue(self, section)
-	return fs.readfile("/etc/shadowvpn/client_down.sh") or ""
-end
-
-function o.write(self, section, value)
-	if value then
-		fs.writefile("/etc/shadowvpn/client_down.sh", value:gsub("\r\n?", "\n"))
-	end
-end
+o = s:option(Value, "route_file", translate("Routing File"))
+o.datatype = "file"
+o:depends("route_mode", 1)
+o:depends("route_mode", 2)
 
 return m

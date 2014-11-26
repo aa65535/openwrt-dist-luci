@@ -37,17 +37,23 @@ msgstr "接口名称"
 msgid "Edit Configuration Template"
 msgstr "编辑配置模板"
 
-msgid "Edit Up Script"
-msgstr "编辑启动脚本"
-
-msgid "Edit Down Script"
-msgstr "编辑退出脚本"
-
 msgid "This is the content of the file '/etc/shadowvpn/client.conf' from which your ShadowVPN configuration will be generated. Values enclosed by pipe symbols ('|') should not be changed. They get their values from the 'General Setting' tab."
 msgstr "这是文件 '/etc/shadowvpn/client.conf' 的内容，ShadowVPN 的配置将用它生成。使用管符号('|')包围的值不应被修改。它们将从“一般设置”选项卡取值。"
 
-msgid "This is the content of the file '/etc/shadowvpn/client_up.sh'. The script to run after VPN is created. Before you modify it needs to stop the VPN service."
-msgstr "这是文件 '/etc/shadowvpn/client_up.sh' 的内容。此脚本会在 VPN 建立后执行。修改前请先停止 VPN 服务。"
+msgid "Routing Configuration"
+msgstr "路由表设置"
 
-msgid "This is the content of the file '/etc/shadowvpn/client_down.sh'. The script to run before stopping VPN. Before you modify it needs to stop the VPN service."
-msgstr "这是文件 '/etc/shadowvpn/client_down.sh' 的内容。此脚本会在 VPN 停止后执行。修改前请先停止 VPN 服务。"
+msgid "Routing Mode"
+msgstr "路由模式"
+
+msgid "Global Mode"
+msgstr "全局模式"
+
+msgid "Domestic Routes"
+msgstr "国内路由"
+
+msgid "Foreign Routes"
+msgstr "国外路由"
+
+msgid "Routing File"
+msgstr "路由文件"
