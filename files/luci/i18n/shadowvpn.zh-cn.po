@@ -28,6 +28,12 @@ msgstr "服务器端口"
 msgid "Password"
 msgstr "密码"
 
+msgid "Concurrency Number"
+msgstr "并发连接数"
+
+msgid "Must be the SAME with server"
+msgstr "必须与服务端相同"
+
 msgid "Override MTU"
 msgstr "设置MTU"
 

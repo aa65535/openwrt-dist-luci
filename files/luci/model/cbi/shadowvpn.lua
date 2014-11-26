@@ -34,6 +34,13 @@ o = s:taboption("general", Value, "password", translate("Password"))
 o.password = true
 o.rmempty = false
 
+o = s:taboption("general", Value, "concurrency",
+	translate("Concurrency Number"),
+	translate("Must be the SAME with server"))
+o.default = 1
+o.datatype = "uinteger"
+o.rmempty = false
+
 o = s:taboption("general", Value, "mtu", translate("Override MTU"))
 o.placeholder = 1440
 o.default = 1440
