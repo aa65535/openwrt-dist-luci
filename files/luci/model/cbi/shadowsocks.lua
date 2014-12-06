@@ -89,29 +89,29 @@ o.placeholder = 5353
 
 o = s:option(Value, "tunnel_forward",
 	translate("Forwarding Tunnel"),
-	translate("Setup a local port forwarding tunnel"))
+	translate("Setup a local port forwarding tunnel [ip:port]"))
 o.default = "8.8.4.4:53"
 o.placeholder = "8.8.4.4:53"
 
 -- Access Control
-s = m:section(TypedSection, "shadowsocks", translate("Access Control"))
+s = m:section(TypedSection, "shadowsocks", translate("LAN Access Control"))
 s.anonymous = true
 
 o = s:option(ListValue, "ac_mode", translate("Access Control Mode"))
 o:value("0", translate("Off"))
-o:value("1", translate("Accept"))
-o:value("2", translate("Reject"))
+o:value("1", translate("Whitelist"))
+o:value("2", translate("Blacklist"))
 o.default = 0
 o.rmempty = false
 
 o = s:option(DynamicList, "accept_ip",
-	translate("Accept IP"),
+	translate("LAN IP Address"),
 	translate("The traffic of these IP will be transited through shadowsocks"))
 o.datatype = "ipaddr"
 o:depends("ac_mode", 1)
 
 o = s:option(Value, "reject_ip",
-	translate("Reject IP"),
+	translate("LAN IP Address"),
 	translate("The traffic of this IP won't be transited through shadowsocks"))
 o.datatype = "ipaddr"
 o:depends("ac_mode", 2)
