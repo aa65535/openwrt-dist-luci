@@ -62,6 +62,8 @@ e = {
 	"idea-cfb",
 	"rc2-cfb",
 	"seed-cfb",
+	"salsa20",
+	"chacha20",
 }
 
 o = s:option(ListValue, "encrypt_method", translate("Encrypt Method"))
