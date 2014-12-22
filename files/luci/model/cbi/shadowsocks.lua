@@ -72,10 +72,6 @@ for i,v in ipairs(e) do
 end
 o:depends("use_conf_file", "")
 
-o = s:option(Value, "ignore_list", translate("Ignore IP List"))
-o.placeholder = "/etc/shadowsocks/ignore.list"
-o.datatype = "file"
-
 -- UDP Forward
 s = m:section(TypedSection, "shadowsocks", translate("UDP Forward"))
 s.anonymous = true
@@ -91,11 +87,11 @@ o.placeholder = 5353
 
 o = s:option(Value, "tunnel_forward",
 	translate("Forwarding Tunnel"),
-	translate("Setup a local port forwarding tunnel [ip:port]"))
+	translate("Setup a local port forwarding tunnel [addr:port]"))
 o.default = "8.8.4.4:53"
 o.placeholder = "8.8.4.4:53"
 
--- Access Control
+-- LAN Access Control
 s = m:section(TypedSection, "shadowsocks", translate("LAN Access Control"))
 s.anonymous = true
 
@@ -117,5 +113,20 @@ o = s:option(Value, "reject_ip",
 	translate("The traffic of this IP won't be transited through shadowsocks"))
 o.datatype = "ipaddr"
 o:depends("ac_mode", 2)
+
+-- WAN Traffic Redirection
+s = m:section(TypedSection, "shadowsocks", translate("WAN Traffic Redirection"))
+s.anonymous = true
+
+o = s:option(ListValue, "tr_mode", translate("Traffic Redirection Mode"))
+o:value("0", translate("Ignore List"))
+o:value("1", translate("Global Proxy"))
+o.default = 0
+o.rmempty = false
+
+o = s:option(Value, "ignore_list", translate("IP Ignore List"))
+o.placeholder = "/etc/shadowsocks/ignore.list"
+o.datatype = "file"
+o:depends("tr_mode", 0)
 
 return m
