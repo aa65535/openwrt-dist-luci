@@ -10,9 +10,6 @@ msgstr "ShadowVPN 运行中"
 msgid "ShadowVPN is not running"
 msgstr "ShadowVPN 未运行"
 
-msgid "Common Configuration"
-msgstr "一般设置"
-
 msgid "General Setting"
 msgstr "基本设置"
 
@@ -40,14 +37,8 @@ msgstr "设置MTU"
 msgid "Interface Name"
 msgstr "接口名称"
 
-msgid "Edit Configuration Template"
-msgstr "编辑配置模板"
-
-msgid "This is the content of the file '/etc/shadowvpn/client.conf' from which your ShadowVPN configuration will be generated. Values enclosed by pipe symbols ('|') should not be changed. They get their values from the 'General Setting' tab."
-msgstr "这是文件 '/etc/shadowvpn/client.conf' 的内容，ShadowVPN 的配置将用它生成。使用管符号('|')包围的值不应被修改。它们将从“一般设置”选项卡取值。"
-
 msgid "Routing Configuration"
-msgstr "路由表设置"
+msgstr "路由设置"
 
 msgid "Routing Mode"
 msgstr "路由模式"
