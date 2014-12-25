@@ -37,6 +37,15 @@ msgstr "密码"
 msgid "Encrypt Method"
 msgstr "加密方式"
 
+msgid "Proxy Method"
+msgstr "代理方式"
+
+msgid "Global Proxy"
+msgstr "全局代理"
+
+msgid "Ignore List"
+msgstr "忽略列表"
+
 msgid "UDP Forward"
 msgstr "UDP 转发"
 
@@ -72,18 +81,3 @@ msgstr "这些 IP 的流量将经过 ShadowSocks"
 
 msgid "The traffic of this IP won't be transited through shadowsocks"
 msgstr "此 IP 的流量将不经过 ShadowSocks"
-
-msgid "WAN Traffic Redirection"
-msgstr "外网流量重定向"
-
-msgid "Traffic Redirection Mode"
-msgstr "流量重定向模式"
-
-msgid "Global Proxy"
-msgstr "全局代理"
-
-msgid "Ignore List"
-msgstr "忽略列表"
-
-msgid "IP Ignore List"
-msgstr "IP 忽略列表"
