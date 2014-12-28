@@ -9,7 +9,8 @@ APP 列表
  -------------------------------|-----------------------------------------------
  [luci-app-chinadns-c][1]       | LuCI configuration pages for ChinaDNS-C
  [luci-app-shadowsocks-spec][0] | LuCI configuration pages for shadowsocks-libev-spec
- [luci-app-shadowvpn][2] | LuCI configuration pages for ShadowVPN
+ [luci-app-shadowvpn][2]        | LuCI configuration pages for ShadowVPN
+ [luci-app-redsocks2][3]        | LuCI configuration pages for RedSocks2
 
 适用项目
 ---
@@ -17,9 +18,10 @@ APP 列表
 
  Name                     | Description
  -------------------------|-----------------------------------
- [openwrt-chinadns][5]    | OpenWrt's ChinaDNS-C Makefile
- [openwrt-shadowsocks][7] | OpenWrt's ShadowSocks Makefile
- [openwrt-shadowvpn][8]   | OpenWrt's ShadowVPN Makefile
+ [openwrt-chinadns][5]    | ChinaDNS-C for OpenWrt
+ [openwrt-shadowsocks][7] | Shadowsocks-libev for OpenWrt
+ [openwrt-shadowvpn][8]   | ShadowVPN for OpenWrt
+ [openwrt-redsocks2][R]   | RedSocks2 for OpenWrt
 
 编译说明
 ---
@@ -41,7 +43,9 @@ make V=99
   [0]: http://sourceforge.net/projects/openwrt-dist/files/luci-app/shadowsocks-spec/
   [1]: http://sourceforge.net/projects/openwrt-dist/files/luci-app/chinadns-c/
   [2]: http://sourceforge.net/projects/openwrt-dist/files/luci-app/shadowvpn/
+  [3]: http://sourceforge.net/projects/openwrt-dist/files/luci-app/redsocks2/
   [5]: https://github.com/aa65535/openwrt-chinadns
-  [7]: https://github.com/aa65535/openwrt-shadowsocks
+  [7]: https://github.com/shadowsocks/openwrt-shadowsocks
   [8]: https://github.com/aa65535/openwrt-shadowvpn
-  [S]: http://downloads.openwrt.org/snapshots/trunk/
+  [R]: https://github.com/aa65535/openwrt-redsocks2
+  [S]: http://wiki.openwrt.org/doc/howto/obtain.firmware.sdk
