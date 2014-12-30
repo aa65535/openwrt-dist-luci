@@ -75,9 +75,3 @@ msgstr "黑名单"
 
 msgid "LAN IP Address"
 msgstr "内网 IP 地址"
-
-msgid "The traffic of these IP will be transited through shadowsocks"
-msgstr "这些 IP 的流量将经过 ShadowSocks"
-
-msgid "The traffic of this IP won't be transited through shadowsocks"
-msgstr "此 IP 的流量将不经过 ShadowSocks"
