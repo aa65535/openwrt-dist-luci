@@ -16,11 +16,14 @@ msgstr "基本设置"
 msgid "Enable"
 msgstr "启用"
 
+msgid "Bidirectional Filter"
+msgstr "双向过滤"
+
 msgid "Fake IP List"
 msgstr "虚假 IP 列表"
 
-msgid "Chnroute File"
-msgstr "Chnroute 文件"
+msgid "CHNRoute File"
+msgstr "CHNRoute 文件"
 
 msgid "Local Port"
 msgstr "本地端口"
@@ -30,3 +33,9 @@ msgstr "上游服务器"
 
 msgid "Use commas to separate multiple ip address"
 msgstr "多个 IP 地址使用逗号隔开"
+
+msgid "Delay Time"
+msgstr "等待时间"
+
+msgid "Delay time for suspects, default: 0.3"
+msgstr "等待可疑 IP，默认: 0.3"
