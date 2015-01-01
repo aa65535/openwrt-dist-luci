@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2014 OpenWrt-dist
+# Copyright (C) 2015 OpenWrt-dist
 #
 # This is free software, licensed under the GNU General Public License v3.
 # See /LICENSE for more information.
@@ -8,7 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=openwrt-dist-luci
-PKG_VERSION:=1.2.1
+PKG_VERSION:=1.2.2
 PKG_RELEASE:=1
 
 PKG_LICENSE:=GPLv3
