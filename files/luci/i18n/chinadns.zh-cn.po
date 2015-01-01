@@ -38,4 +38,4 @@ msgid "Delay Time"
 msgstr "等待时间"
 
 msgid "Delay time for suspects, default: 0.3"
-msgstr "等待可疑 IP，默认: 0.3"
+msgstr "出现疑似污染结果时的等待时间，默认: 0.3"
