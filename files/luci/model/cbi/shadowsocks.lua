@@ -88,8 +88,8 @@ o.rmempty = false
 
 o = s:option(Value, "tunnel_port", translate("UDP Local Port"))
 o.datatype = "port"
-o.default = 5353
-o.placeholder = 5353
+o.default = 5300
+o.placeholder = 5300
 
 o = s:option(Value, "tunnel_forward",
 	translate("Forwarding Tunnel"),
