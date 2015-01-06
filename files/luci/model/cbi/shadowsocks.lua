@@ -2,7 +2,7 @@
 openwrt-dist-luci: ShadowSocks
 ]]--
 
-local m, s, o, e
+local m, s, o, e, a
 
 if luci.sys.call("pidof ss-redir >/dev/null") == 0 then
 	m = Map("shadowsocks", translate("ShadowSocks"), translate("ShadowSocks is running"))
@@ -97,19 +97,24 @@ o = s:option(Value, "tunnel_forward",
 o.default = "8.8.4.4:53"
 o.placeholder = "8.8.4.4:53"
 
--- LAN Access Control
-s = m:section(TypedSection, "shadowsocks", translate("LAN Access Control"))
+-- Access Control
+s = m:section(TypedSection, "shadowsocks", translate("Access Control"))
 s.anonymous = true
 
-o = s:option(ListValue, "lan_ac_mode", translate("Access Control Mode"))
-o:value("0", translate("Off"))
-o:value("1", translate("Whitelist"))
-o:value("2", translate("Blacklist"))
+o = s:option(ListValue, "lan_ac_mode", translate("Access Control"))
+o:value("0", translate("Disabled"))
+o:value("1", translate("Allow listed only"))
+o:value("2", translate("Allow all except listed"))
 o.default = 0
 o.rmempty = false
 
-o = s:option(DynamicList, "lan_ac_ip", translate("LAN IP Address"))
+a = luci.sys.net.arptable() or {}
+
+o = s:option(DynamicList, "lan_ac_ip", translate("LAN IP List"))
 o.datatype = "ipaddr"
+for i,v in ipairs(a) do
+	o:value(v["IP address"])
+end
 o:depends("lan_ac_mode", 1)
 o:depends("lan_ac_mode", 2)
 
