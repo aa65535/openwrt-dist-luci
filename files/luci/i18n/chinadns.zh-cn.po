@@ -16,26 +16,29 @@ msgstr "基本设置"
 msgid "Enable"
 msgstr "启用"
 
-msgid "Bidirectional Filter"
-msgstr "双向过滤"
-
-msgid "Fake IP List"
-msgstr "虚假 IP 列表"
-
-msgid "CHNRoute File"
-msgstr "CHNRoute 文件"
-
 msgid "Local Port"
 msgstr "本地端口"
+
+msgid "Fake IP List"
+msgstr "污染IP列表"
+
+msgid "CHNRoute File"
+msgstr "国内路由表"
 
 msgid "Upstream Servers"
 msgstr "上游服务器"
 
 msgid "Use commas to separate multiple ip address"
-msgstr "多个 IP 地址使用逗号隔开"
+msgstr "多个IP地址使用逗号隔开"
 
-msgid "Delay Time"
-msgstr "等待时间"
+msgid "Enable Bidirectional Filter"
+msgstr "启用双向过滤"
+
+msgid "Also filter results inside China from foreign DNS servers"
+msgstr "同时过滤从国外DNS返回的IP为国内的结果"
+
+msgid "Delay Time(sec)"
+msgstr "延迟时间(秒)"
 
 msgid "Delay time for suspects, default: 0.3"
-msgstr "出现疑似污染结果时的等待时间，默认: 0.3"
+msgstr "返回正确结果所需的时间，默认: 0.3"
