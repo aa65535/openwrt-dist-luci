@@ -1,6 +1,6 @@
 
 INSTALL = install
-PREFIX  = /usr/local
+PREFIX  = /usr/bin
 
 po2lmo: src/po2lmo.o src/template_lmo.o
 	$(CC) -o src/po2lmo src/po2lmo.o src/template_lmo.o
