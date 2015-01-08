@@ -22,7 +22,7 @@ o = s:option(Flag, "use_conf_file", translate("Use Config File"))
 o.default = 1
 o.rmempty = false
 
-o = s:option(Value, "config_file", translate("Config File"))
+o = s:option(Value, "config_file", translate("Config File Path"))
 o.placeholder = "/etc/shadowsocks/config.json"
 o.default = "/etc/shadowsocks/config.json"
 o.datatype = "file"
@@ -40,6 +40,12 @@ o = s:option(Value, "local_port", translate("Local Port"))
 o.datatype = "port"
 o.placeholder = 1080
 o.default = 1080
+o:depends("use_conf_file", "")
+
+o = s:option(Value, "timeout", translate("Connection Timeout"))
+o.datatype = "uinteger"
+o.placeholder = 60
+o.default = 60
 o:depends("use_conf_file", "")
 
 o = s:option(Value, "password", translate("Password"))
@@ -91,9 +97,7 @@ o.datatype = "port"
 o.default = 5300
 o.placeholder = 5300
 
-o = s:option(Value, "tunnel_forward",
-	translate("Forwarding Tunnel"),
-	translate("Setup a local port forwarding tunnel [addr:port]"))
+o = s:option(Value, "tunnel_forward", translate("Forwarding Tunnel"))
 o.default = "8.8.4.4:53"
 o.placeholder = "8.8.4.4:53"
 
@@ -101,7 +105,9 @@ o.placeholder = "8.8.4.4:53"
 s = m:section(TypedSection, "shadowsocks", translate("Access Control"))
 s.anonymous = true
 
-o = s:option(ListValue, "lan_ac_mode", translate("Access Control"))
+s:tab("lan_ac", translate("LAN"))
+
+o = s:taboption("lan_ac", ListValue, "lan_ac_mode", translate("Access Control"))
 o:value("0", translate("Disabled"))
 o:value("1", translate("Allow listed only"))
 o:value("2", translate("Allow all except listed"))
@@ -110,12 +116,18 @@ o.rmempty = false
 
 a = luci.sys.net.arptable() or {}
 
-o = s:option(DynamicList, "lan_ac_ip", translate("LAN IP List"))
+o = s:taboption("lan_ac", DynamicList, "lan_ac_ip", translate("LAN IP List"))
 o.datatype = "ipaddr"
 for i,v in ipairs(a) do
 	o:value(v["IP address"])
 end
-o:depends("lan_ac_mode", 1)
-o:depends("lan_ac_mode", 2)
+
+s:tab("wan_ac", translate("WAN"))
+
+o = s:taboption("wan_ac", DynamicList, "wan_bp_ip", translate("Bypassed IP"))
+o.datatype = "ip4addr"
+
+o = s:taboption("wan_ac", DynamicList, "wan_fw_ip", translate("Forwarded IP"))
+o.datatype = "ip4addr"
 
 return m
