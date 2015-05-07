@@ -40,6 +40,9 @@ msgstr "密码"
 msgid "Encrypt Method"
 msgstr "加密方式"
 
+msgid "Proxy Setting"
+msgstr "代理设置"
+
 msgid "Proxy Method"
 msgstr "代理方式"
 
@@ -48,6 +51,9 @@ msgstr "全局代理"
 
 msgid "Ignore List"
 msgstr "忽略列表"
+
+msgid "Proxy Protocol"
+msgstr "代理协议"
 
 msgid "UDP Forward"
 msgstr "UDP转发"

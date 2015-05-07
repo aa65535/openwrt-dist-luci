@@ -78,10 +78,20 @@ for i,v in ipairs(e) do
 end
 o:depends("use_conf_file", "")
 
+-- Proxy Setting
+s = m:section(TypedSection, "shadowsocks", translate("Proxy Setting"))
+s.anonymous = true
+
 o = s:option(Value, "ignore_list", translate("Proxy Method"))
 o:value("/dev/null", translate("Global Proxy"))
 o:value("/etc/shadowsocks/ignore.list", translate("Ignore List"))
 o.default = "/etc/shadowsocks/ignore.list"
+o.rmempty = false
+
+o = s:option(ListValue, "udp_relay", translate("Proxy Protocol"))
+o:value("0", translate("TCP only"))
+o:value("1", translate("TCP+UDP"))
+o.default = 1
 o.rmempty = false
 
 -- UDP Forward
