@@ -16,11 +16,14 @@ msgstr "全局设置"
 msgid "Enable"
 msgstr "启用"
 
-msgid "Use Config File"
-msgstr "使用配置文件"
+msgid "Enabled"
+msgstr "已启用"
 
-msgid "Config File Path"
-msgstr "配置文件路径"
+msgid "Disabled"
+msgstr "已禁用"
+
+msgid "Custom"
+msgstr "自定义"
 
 msgid "Server Address"
 msgstr "服务器地址"
@@ -40,20 +43,14 @@ msgstr "密码"
 msgid "Encrypt Method"
 msgstr "加密方式"
 
-msgid "Proxy Setting"
-msgstr "代理设置"
-
-msgid "Proxy Method"
-msgstr "代理方式"
-
-msgid "Global Proxy"
-msgstr "全局代理"
-
 msgid "Ignore List"
 msgstr "忽略列表"
 
-msgid "Proxy Protocol"
-msgstr "代理协议"
+msgid "UDP Relay"
+msgstr "UDP中继"
+
+msgid "Relay Mode"
+msgstr "中继模式"
 
 msgid "UDP Forward"
 msgstr "UDP转发"
@@ -66,9 +63,6 @@ msgstr "UDP转发地址"
 
 msgid "Access Control"
 msgstr "访问控制"
-
-msgid "Disabled"
-msgstr "已禁用"
 
 msgid "Allow listed only"
 msgstr "仅允许列表内"

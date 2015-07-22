@@ -10,48 +10,6 @@ else
 	m = Map("shadowsocks", translate("ShadowSocks"), translate("ShadowSocks is not running"))
 end
 
--- Global Setting
-s = m:section(TypedSection, "shadowsocks", translate("Global Setting"))
-s.anonymous = true
-
-o = s:option(Flag, "enable", translate("Enable"))
-o.default = 1
-o.rmempty = false
-
-o = s:option(Flag, "use_conf_file", translate("Use Config File"))
-o.default = 1
-o.rmempty = false
-
-o = s:option(Value, "config_file", translate("Config File Path"))
-o.placeholder = "/etc/shadowsocks/config.json"
-o.default = "/etc/shadowsocks/config.json"
-o.datatype = "file"
-o:depends("use_conf_file", 1)
-
-o = s:option(Value, "server", translate("Server Address"))
-o.datatype = "host"
-o:depends("use_conf_file", "")
-
-o = s:option(Value, "server_port", translate("Server Port"))
-o.datatype = "port"
-o:depends("use_conf_file", "")
-
-o = s:option(Value, "local_port", translate("Local Port"))
-o.datatype = "port"
-o.placeholder = 1080
-o.default = 1080
-o:depends("use_conf_file", "")
-
-o = s:option(Value, "timeout", translate("Connection Timeout"))
-o.datatype = "uinteger"
-o.placeholder = 60
-o.default = 60
-o:depends("use_conf_file", "")
-
-o = s:option(Value, "password", translate("Password"))
-o.password = true
-o:depends("use_conf_file", "")
-
 e = {
 	"table",
 	"rc4",
@@ -72,27 +30,85 @@ e = {
 	"chacha20",
 }
 
+-- Global Setting
+s = m:section(TypedSection, "shadowsocks", translate("Global Setting"))
+s.anonymous = true
+
+o = s:option(Flag, "enable", translate("Enable"))
+o.default = 1
+o.rmempty = false
+
+o = s:option(Value, "server", translate("Server Address"))
+o.datatype = "ipaddr"
+o.rmempty = false
+
+o = s:option(Value, "server_port", translate("Server Port"))
+o.datatype = "port"
+o.rmempty = false
+
+o = s:option(Value, "local_port", translate("Local Port"))
+o.datatype = "port"
+o.default = 1080
+o.rmempty = false
+
+o = s:option(Value, "timeout", translate("Connection Timeout"))
+o.datatype = "uinteger"
+o.default = 60
+o.rmempty = false
+
+o = s:option(Value, "password", translate("Password"))
+o.password = true
+o.rmempty = false
+
 o = s:option(ListValue, "encrypt_method", translate("Encrypt Method"))
 for i,v in ipairs(e) do
 	o:value(v)
 end
-o:depends("use_conf_file", "")
+o.rmempty = false
 
--- Proxy Setting
-s = m:section(TypedSection, "shadowsocks", translate("Proxy Setting"))
+o = s:option(Value, "ignore_list", translate("Ignore List"))
+o:value("/dev/null", translate("Disabled"))
+o.default = "/dev/null"
+o.rmempty = false
+
+-- UDP Relay
+s = m:section(TypedSection, "shadowsocks", translate("UDP Relay"))
 s.anonymous = true
 
-o = s:option(Value, "ignore_list", translate("Proxy Method"))
-o:value("/dev/null", translate("Global Proxy"))
-o:value("/etc/shadowsocks/ignore.list", translate("Ignore List"))
-o.default = "/etc/shadowsocks/ignore.list"
+o = s:option(ListValue, "udp_mode", translate("Relay Mode"))
+o:value("0", translate("Disabled"))
+o:value("1", translate("Enabled"))
+o:value("2", translate("Custom"))
+o.default = 0
 o.rmempty = false
 
-o = s:option(ListValue, "udp_relay", translate("Proxy Protocol"))
-o:value("0", translate("TCP only"))
-o:value("1", translate("TCP+UDP"))
-o.default = 1
-o.rmempty = false
+o = s:option(Value, "udp_server", translate("Server Address"))
+o.datatype = "ipaddr"
+o:depends("udp_mode", 2)
+
+o = s:option(Value, "udp_server_port", translate("Server Port"))
+o.datatype = "port"
+o:depends("udp_mode", 2)
+
+o = s:option(Value, "udp_local_port", translate("Local Port"))
+o.datatype = "port"
+o.default = 1081
+o:depends("udp_mode", 2)
+
+o = s:option(Value, "udp_timeout", translate("Connection Timeout"))
+o.datatype = "uinteger"
+o.default = 60
+o:depends("udp_mode", 2)
+
+o = s:option(Value, "udp_password", translate("Password"))
+o.password = true
+o:depends("udp_mode", 2)
+
+o = s:option(ListValue, "udp_encrypt_method", translate("Encrypt Method"))
+for i,v in ipairs(e) do
+	o:value(v)
+end
+o:depends("udp_mode", 2)
 
 -- UDP Forward
 s = m:section(TypedSection, "shadowsocks", translate("UDP Forward"))
@@ -105,11 +121,9 @@ o.rmempty = false
 o = s:option(Value, "tunnel_port", translate("UDP Local Port"))
 o.datatype = "port"
 o.default = 5300
-o.placeholder = 5300
 
 o = s:option(Value, "tunnel_forward", translate("Forwarding Tunnel"))
 o.default = "8.8.4.4:53"
-o.placeholder = "8.8.4.4:53"
 
 -- Access Control
 s = m:section(TypedSection, "shadowsocks", translate("Access Control"))
