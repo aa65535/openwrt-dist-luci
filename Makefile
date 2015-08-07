@@ -8,7 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=openwrt-dist-luci
-PKG_VERSION:=1.3.3
+PKG_VERSION:=1.3.4
 PKG_RELEASE:=1
 
 PKG_LICENSE:=GPLv3
