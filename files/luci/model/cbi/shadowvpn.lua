@@ -32,9 +32,17 @@ o.rmempty = false
 
 o = s:option(Value, "concurrency",
 	translate("Concurrency Number"),
-	translate("Must be the SAME with server"))
+	translate("Must be the same value with server"))
 o.default = 1
 o.datatype = "uinteger"
+o.rmempty = false
+
+o = s:option(Value, "net",
+	translate("Local Subnet"),
+	translate("Must be the same network segment with server"))
+o.placeholder = "10.7.0.1/31"
+o.default = "10.7.0.1/31"
+o.datatype = "ip4addr"
 o.rmempty = false
 
 o = s:option(Value, "mtu", translate("Override MTU"))
