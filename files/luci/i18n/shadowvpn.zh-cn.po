@@ -22,6 +22,9 @@ msgstr "服务器地址"
 msgid "Server Port"
 msgstr "服务器端口"
 
+msgid "User Token"
+msgstr "用户令牌"
+
 msgid "Password"
 msgstr "密码"
 
@@ -33,9 +36,6 @@ msgstr "必须与服务端值相同"
 
 msgid "Local Subnet"
 msgstr "本地子网"
-
-msgid "Must be the same network segment with server"
-msgstr "必须与服务端在同一网段"
 
 msgid "Override MTU"
 msgstr "设置MTU"

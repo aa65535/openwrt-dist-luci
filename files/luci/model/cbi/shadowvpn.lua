@@ -26,22 +26,28 @@ o = s:option(Value, "port", translate("Server Port"))
 o.datatype = "port"
 o.rmempty = false
 
+o = s:option(Value, "user_token", translate("User Token"))
+o:value("0000000000000000", translate("Disabled"))
+o.default = "0000000000000000"
+o.datatype = "rangelength(16,16)"
+o.rmempty = false
+
 o = s:option(Value, "password", translate("Password"))
 o.password = true
 o.rmempty = false
 
+--[[
 o = s:option(Value, "concurrency",
 	translate("Concurrency Number"),
 	translate("Must be the same value with server"))
 o.default = 1
 o.datatype = "uinteger"
 o.rmempty = false
+]]--
 
-o = s:option(Value, "net",
-	translate("Local Subnet"),
-	translate("Must be the same network segment with server"))
-o.placeholder = "10.7.0.1/31"
-o.default = "10.7.0.1/31"
+o = s:option(Value, "net", translate("Local Subnet"))
+o.placeholder = "10.7.0.2/24"
+o.default = "10.7.0.2/24"
 o.datatype = "ip4addr"
 o.rmempty = false
 
