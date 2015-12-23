@@ -2,15 +2,18 @@
 openwrt-dist-luci: ShadowSocks
 ]]--
 
-local m, s, o, e, a
+local m, s, o, u
+local shadowsocks = "shadowsocks"
 
 if luci.sys.call("pidof ss-redir >/dev/null") == 0 then
-	m = Map("shadowsocks", translate("ShadowSocks"), translate("ShadowSocks is running"))
+	m = Map(shadowsocks, translate("ShadowSocks"), translate("ShadowSocks is running"))
 else
-	m = Map("shadowsocks", translate("ShadowSocks"), translate("ShadowSocks is not running"))
+	m = Map(shadowsocks, translate("ShadowSocks"), translate("ShadowSocks is not running"))
 end
 
-e = {
+local server_table = {}
+local arp_table = luci.sys.net.arptable() or {}
+local encrypt_methods = {
 	"table",
 	"rc4",
 	"rc4-md5",
@@ -30,16 +33,40 @@ e = {
 	"chacha20",
 }
 
--- Global Setting
-s = m:section(TypedSection, "shadowsocks", translate("Global Setting"))
+u = require("uci").cursor()
+u:foreach(shadowsocks, "servers", function(s)
+	local server = u:get(shadowsocks, s[".name"], "server")
+	local server_port = u:get(shadowsocks, s[".name"], "server_port")
+	if server and server_port then
+		server_table[s[".name"]] = server .. ":" .. server_port
+	end
+end)
+
+-- [[ Global Setting ]]--
+s = m:section(TypedSection, "global", translate("Global Setting"))
 s.anonymous = true
 
-o = s:option(Flag, "enable", translate("Enable"))
-o.default = 1
+o = s:option(ListValue, "global_server", translate("Global Server"))
+o:value("nil", translate("Disable ShadowSocks"))
+for k, v in pairs(server_table) do
+	o:value(k, v)
+end
+o.default = "nil"
 o.rmempty = false
 
+o = s:option(ListValue, "udp_relay_server", translate("UDP Relay Server"))
+o:value("", translate("Disable"))
+o:value("same", translate("Same as Global Server"))
+for k, v in pairs(server_table) do
+	o:value(k, v)
+end
+
+-- [[ Servers Setting ]]--
+s = m:section(TypedSection, "servers", translate("Servers Setting"))
+s.anonymous = true
+s.addremove   = true
+
 o = s:option(Flag, "auth_enable", translate("Onetime Authentication"))
-o.default = 1
 o.rmempty = false
 
 o = s:option(Value, "server", translate("Server Address"))
@@ -65,97 +92,60 @@ o.password = true
 o.rmempty = false
 
 o = s:option(ListValue, "encrypt_method", translate("Encrypt Method"))
-for i,v in ipairs(e) do
+for _, v in ipairs(encrypt_methods) do
 	o:value(v)
 end
 o.rmempty = false
 
-o = s:option(Value, "ignore_list", translate("Ignore List"))
-o:value("/dev/null", translate("Disabled"))
-o.default = "/dev/null"
-o.rmempty = false
-
--- UDP Relay
-s = m:section(TypedSection, "shadowsocks", translate("UDP Relay"))
-s.anonymous = true
-
-o = s:option(ListValue, "udp_mode", translate("Relay Mode"))
-o:value("0", translate("Disabled"))
-o:value("1", translate("Enabled"))
-o:value("2", translate("Custom"))
-o.default = 0
-o.rmempty = false
-
-o = s:option(Value, "udp_server", translate("Server Address"))
-o.datatype = "ipaddr"
-o:depends("udp_mode", 2)
-
-o = s:option(Value, "udp_server_port", translate("Server Port"))
-o.datatype = "port"
-o:depends("udp_mode", 2)
-
-o = s:option(Value, "udp_local_port", translate("Local Port"))
-o.datatype = "port"
-o.default = 1081
-o:depends("udp_mode", 2)
-
-o = s:option(Value, "udp_timeout", translate("Connection Timeout"))
-o.datatype = "uinteger"
-o.default = 60
-o:depends("udp_mode", 2)
-
-o = s:option(Value, "udp_password", translate("Password"))
-o.password = true
-o:depends("udp_mode", 2)
-
-o = s:option(ListValue, "udp_encrypt_method", translate("Encrypt Method"))
-for i,v in ipairs(e) do
-	o:value(v)
-end
-o:depends("udp_mode", 2)
-
--- UDP Forward
-s = m:section(TypedSection, "shadowsocks", translate("UDP Forward"))
+-- [[ UDP Forward ]]--
+s = m:section(TypedSection, "udp_forward", translate("UDP Forward"))
 s.anonymous = true
 
 o = s:option(Flag, "tunnel_enable", translate("Enable"))
-o.default = 1
+o.default = 0
 o.rmempty = false
 
 o = s:option(Value, "tunnel_port", translate("UDP Local Port"))
 o.datatype = "port"
 o.default = 5300
+o.rmempty = false
 
 o = s:option(Value, "tunnel_forward", translate("Forwarding Tunnel"))
 o.default = "8.8.4.4:53"
-
--- Access Control
-s = m:section(TypedSection, "shadowsocks", translate("Access Control"))
-s.anonymous = true
-
-s:tab("lan_ac", translate("LAN"))
-
-o = s:taboption("lan_ac", ListValue, "lan_ac_mode", translate("Access Control"))
-o:value("0", translate("Disabled"))
-o:value("1", translate("Allow listed only"))
-o:value("2", translate("Allow all except listed"))
-o.default = 0
 o.rmempty = false
 
-a = luci.sys.net.arptable() or {}
+-- [[ Access Control ]]--
+s = m:section(TypedSection, "access_control", translate("Access Control"))
+s.anonymous = true
 
-o = s:taboption("lan_ac", DynamicList, "lan_ac_ip", translate("LAN IP List"))
+-- Part of WAN
+s:tab("wan_ac", translate("Interfaces - WAN"))
+
+o = s:taboption("wan_ac", Value, "wan_bp_list", translate("Bypassed IP List"))
+o:value("/dev/null", translate("NULL - As Global Proxy"))
+o:value("/etc/chinadns_chnroute.txt", translate("ChinaDNS CHNRoute"))
+o.default = "/dev/null"
+o.rmempty = false
+
+o = s:taboption("wan_ac", DynamicList, "wan_bp_ips", translate("Bypassed IP"))
+o.datatype = "ip4addr"
+
+o = s:taboption("wan_ac", DynamicList, "wan_fw_ips", translate("Forwarded IP"))
+o.datatype = "ip4addr"
+
+-- Part of LAN
+s:tab("lan_ac", translate("Interfaces - LAN"))
+
+o = s:taboption("lan_ac", ListValue, "lan_ac_mode", translate("LAN Access Control"))
+o:value("0", translate("Disable"))
+o:value("w", translate("Allow listed only"))
+o:value("B", translate("Allow all except listed"))
+o.rmempty = false
+
+o = s:taboption("lan_ac", DynamicList, "lan_ac_ips", translate("LAN Host List"))
 o.datatype = "ipaddr"
-for i,v in ipairs(a) do
+for _, v in ipairs(arp_table) do
 	o:value(v["IP address"])
 end
-
-s:tab("wan_ac", translate("WAN"))
-
-o = s:taboption("wan_ac", DynamicList, "wan_bp_ip", translate("Bypassed IP"))
-o.datatype = "ip4addr"
-
-o = s:taboption("wan_ac", DynamicList, "wan_fw_ip", translate("Forwarded IP"))
-o.datatype = "ip4addr"
 
 return m

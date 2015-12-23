@@ -4,6 +4,12 @@ msgstr "Content-Type: text/plain; charset=UTF-8\n"
 msgid "ShadowSocks"
 msgstr "ShadowSocks"
 
+msgid "Enable"
+msgstr "启用"
+
+msgid "Disable"
+msgstr "停用"
+
 msgid "ShadowSocks is running"
 msgstr "ShadowSocks 运行中"
 
@@ -13,17 +19,20 @@ msgstr "ShadowSocks 未运行"
 msgid "Global Setting"
 msgstr "全局设置"
 
-msgid "Enable"
-msgstr "启用"
+msgid "Global Server"
+msgstr "全局服务器"
 
-msgid "Enabled"
-msgstr "已启用"
+msgid "Disable ShadowSocks"
+msgstr "停用ShadowSocks"
 
-msgid "Disabled"
-msgstr "已禁用"
+msgid "UDP Relay Server"
+msgstr "UDP中继服务器"
 
-msgid "Custom"
-msgstr "自定义"
+msgid "Same as Global Server"
+msgstr "与全局服务器相同"
+
+msgid "Servers Setting"
+msgstr "服务器配置"
 
 msgid "Onetime Authentication"
 msgstr "一次验证"
@@ -46,15 +55,6 @@ msgstr "密码"
 msgid "Encrypt Method"
 msgstr "加密方式"
 
-msgid "Ignore List"
-msgstr "忽略列表"
-
-msgid "UDP Relay"
-msgstr "UDP中继"
-
-msgid "Relay Mode"
-msgstr "中继模式"
-
 msgid "UDP Forward"
 msgstr "UDP转发"
 
@@ -67,17 +67,35 @@ msgstr "UDP转发地址"
 msgid "Access Control"
 msgstr "访问控制"
 
+msgid "Interfaces - WAN"
+msgstr "接口 - WAN"
+
+msgid "Bypassed IP List"
+msgstr "被忽略IP列表"
+
+msgid "NULL - As Global Proxy"
+msgstr "留空 - 作为全局代理"
+
+msgid "ChinaDNS CHNRoute"
+msgstr "ChinaDNS路由表"
+
+msgid "Bypassed IP"
+msgstr "额外被忽略IP"
+
+msgid "Forwarded IP"
+msgstr "强制走代理IP"
+
+msgid "Interfaces - LAN"
+msgstr "接口 - LAN"
+
+msgid "LAN Access Control"
+msgstr "内网访问控制"
+
 msgid "Allow listed only"
 msgstr "仅允许列表内"
 
 msgid "Allow all except listed"
 msgstr "仅允许列表外"
 
-msgid "LAN IP List"
-msgstr "内网IP列表"
-
-msgid "Bypassed IP"
-msgstr "被忽略的IP"
-
-msgid "Forwarded IP"
-msgstr "走代理的IP"
+msgid "LAN Host List"
+msgstr "内网主机列表"

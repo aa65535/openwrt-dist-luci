@@ -1,5 +1,6 @@
 #
 # Copyright (C) 2015 OpenWrt-dist
+# Copyright (C) 2015 Jian Chang <aa65535@live.com>
 #
 # This is free software, licensed under the GNU General Public License v3.
 # See /LICENSE for more information.
@@ -8,12 +9,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=openwrt-dist-luci
-PKG_VERSION:=1.3.7
+PKG_VERSION:=1.3.8
 PKG_RELEASE:=1
 
 PKG_LICENSE:=GPLv3
 PKG_LICENSE_FILES:=LICENSE
-PKG_MAINTAINER:=aa65535 <aa65535@live.com>
+PKG_MAINTAINER:=Jian Chang <aa65535@live.com>
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)
 
