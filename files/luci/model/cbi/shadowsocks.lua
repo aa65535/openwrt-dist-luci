@@ -5,6 +5,7 @@ openwrt-dist-luci: ShadowSocks
 local m, s, o
 local shadowsocks = "shadowsocks"
 local uci = luci.model.uci.cursor()
+local ipkg = require("luci.model.ipkg")
 
 if luci.sys.call("pidof ss-redir >/dev/null") == 0 then
 	m = Map(shadowsocks, translate("ShadowSocks"), translate("ShadowSocks is running"))
@@ -33,7 +34,12 @@ local encrypt_methods = {
 	"seed-cfb",
 	"salsa20",
 	"chacha20",
+	"chacha20-ietf",
 }
+
+ipkg.list_installed("shadowsocks-libev-spec-polarssl", function(n, v, d)
+	for i=1,5,1 do table.remove(encrypt_methods, 11) end
+end)
 
 uci:foreach(shadowsocks, "servers", function(s)
 	if s.server and s.server_port then
