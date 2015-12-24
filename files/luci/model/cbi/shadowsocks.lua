@@ -2,8 +2,9 @@
 openwrt-dist-luci: ShadowSocks
 ]]--
 
-local m, s, o, u
+local m, s, o
 local shadowsocks = "shadowsocks"
+local uci = luci.model.uci.cursor()
 
 if luci.sys.call("pidof ss-redir >/dev/null") == 0 then
 	m = Map(shadowsocks, translate("ShadowSocks"), translate("ShadowSocks is running"))
@@ -11,6 +12,7 @@ else
 	m = Map(shadowsocks, translate("ShadowSocks"), translate("ShadowSocks is not running"))
 end
 
+local chnroute = uci:get_first("chinadns", "chinadns", "chnroute")
 local server_table = {}
 local arp_table = luci.sys.net.arptable() or {}
 local encrypt_methods = {
@@ -33,12 +35,9 @@ local encrypt_methods = {
 	"chacha20",
 }
 
-u = require("uci").cursor()
-u:foreach(shadowsocks, "servers", function(s)
-	local server = u:get(shadowsocks, s[".name"], "server")
-	local server_port = u:get(shadowsocks, s[".name"], "server_port")
-	if server and server_port then
-		server_table[s[".name"]] = server .. ":" .. server_port
+uci:foreach(shadowsocks, "servers", function(s)
+	if s.server and s.server_port then
+		server_table[s[".name"]] = "%s:%s" %{s.server, s.server_port}
 	end
 end)
 
@@ -123,7 +122,9 @@ s:tab("wan_ac", translate("Interfaces - WAN"))
 
 o = s:taboption("wan_ac", Value, "wan_bp_list", translate("Bypassed IP List"))
 o:value("/dev/null", translate("NULL - As Global Proxy"))
-o:value("/etc/chinadns_chnroute.txt", translate("ChinaDNS CHNRoute"))
+if chnroute then
+	o:value(chnroute, translate("ChinaDNS CHNRoute"))
+end
 o.default = "/dev/null"
 o.rmempty = false
 
@@ -139,7 +140,7 @@ s:tab("lan_ac", translate("Interfaces - LAN"))
 o = s:taboption("lan_ac", ListValue, "lan_ac_mode", translate("LAN Access Control"))
 o:value("0", translate("Disable"))
 o:value("w", translate("Allow listed only"))
-o:value("B", translate("Allow all except listed"))
+o:value("b", translate("Allow all except listed"))
 o.rmempty = false
 
 o = s:taboption("lan_ac", DynamicList, "lan_ac_ips", translate("LAN Host List"))
