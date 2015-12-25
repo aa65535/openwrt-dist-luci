@@ -34,6 +34,9 @@ msgstr "与全局服务器相同"
 msgid "Servers Setting"
 msgstr "服务器配置"
 
+msgid "Alias(optional)"
+msgstr "别名(可选)"
+
 msgid "Onetime Authentication"
 msgstr "一次验证"
 

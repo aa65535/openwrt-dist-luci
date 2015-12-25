@@ -42,7 +42,9 @@ ipkg.list_installed("shadowsocks-libev-spec-polarssl", function(n, v, d)
 end)
 
 uci:foreach(shadowsocks, "servers", function(s)
-	if s.server and s.server_port then
+	if s.alias then
+		server_table[s[".name"]] = s.alias
+	elseif s.server and s.server_port then
 		server_table[s[".name"]] = "%s:%s" %{s.server, s.server_port}
 	end
 end)
@@ -53,23 +55,21 @@ s.anonymous = true
 
 o = s:option(ListValue, "global_server", translate("Global Server"))
 o:value("nil", translate("Disable ShadowSocks"))
-for k, v in pairs(server_table) do
-	o:value(k, v)
-end
+for k, v in pairs(server_table) do o:value(k, v) end
 o.default = "nil"
 o.rmempty = false
 
 o = s:option(ListValue, "udp_relay_server", translate("UDP Relay Server"))
 o:value("", translate("Disable"))
 o:value("same", translate("Same as Global Server"))
-for k, v in pairs(server_table) do
-	o:value(k, v)
-end
+for k, v in pairs(server_table) do o:value(k, v) end
 
 -- [[ Servers Setting ]]--
 s = m:section(TypedSection, "servers", translate("Servers Setting"))
 s.anonymous = true
 s.addremove   = true
+
+o = s:option(Value, "alias", translate("Alias(optional)"))
 
 o = s:option(Flag, "auth_enable", translate("Onetime Authentication"))
 o.rmempty = false
@@ -97,9 +97,7 @@ o.password = true
 o.rmempty = false
 
 o = s:option(ListValue, "encrypt_method", translate("Encrypt Method"))
-for _, v in ipairs(encrypt_methods) do
-	o:value(v)
-end
+for _, v in ipairs(encrypt_methods) do o:value(v) end
 o.rmempty = false
 
 -- [[ UDP Forward ]]--
@@ -128,9 +126,7 @@ s:tab("wan_ac", translate("Interfaces - WAN"))
 
 o = s:taboption("wan_ac", Value, "wan_bp_list", translate("Bypassed IP List"))
 o:value("/dev/null", translate("NULL - As Global Proxy"))
-if chnroute then
-	o:value(chnroute, translate("ChinaDNS CHNRoute"))
-end
+if chnroute then o:value(chnroute, translate("ChinaDNS CHNRoute")) end
 o.default = "/dev/null"
 o.rmempty = false
 
@@ -151,8 +147,6 @@ o.rmempty = false
 
 o = s:taboption("lan_ac", DynamicList, "lan_ac_ips", translate("LAN Host List"))
 o.datatype = "ipaddr"
-for _, v in ipairs(arp_table) do
-	o:value(v["IP address"])
-end
+for _, v in ipairs(arp_table) do o:value(v["IP address"]) end
 
 return m
