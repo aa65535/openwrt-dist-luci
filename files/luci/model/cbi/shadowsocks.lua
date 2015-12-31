@@ -7,12 +7,6 @@ local shadowsocks = "shadowsocks"
 local uci = luci.model.uci.cursor()
 local ipkg = require("luci.model.ipkg")
 
-if luci.sys.call("pidof ss-redir >/dev/null") == 0 then
-	m = Map(shadowsocks, translate("ShadowSocks"), translate("ShadowSocks is running"))
-else
-	m = Map(shadowsocks, translate("ShadowSocks"), translate("ShadowSocks is not running"))
-end
-
 local chnroute = uci:get_first("chinadns", "chinadns", "chnroute")
 local server_table = {}
 local arp_table = luci.sys.net.arptable() or {}
@@ -49,6 +43,26 @@ uci:foreach(shadowsocks, "servers", function(s)
 	end
 end)
 
+m = Map(shadowsocks, translate("ShadowSocks"), translate("A lightweight secured SOCKS5 proxy"))
+
+-- [[ Running Status ]]--
+s = m:section(TypedSection, "global", translate("Running Status"))
+s.anonymous = true
+
+o = s:option(DummyValue, "_status", translate("Transparent Proxy"))
+if luci.sys.call("pidof ss-redir >/dev/null") == 0 then
+	o.value = translate("RUNNING")
+else
+	o.value = translate("NOT RUNNING")
+end
+
+o = s:option(DummyValue, "_status", translate("UDP Forward"))
+if luci.sys.call("pidof ss-tunnel >/dev/null") == 0 then
+	o.value = translate("RUNNING")
+else
+	o.value = translate("NOT RUNNING")
+end
+
 -- [[ Global Setting ]]--
 s = m:section(TypedSection, "global", translate("Global Setting"))
 s.anonymous = true
@@ -59,7 +73,7 @@ for k, v in pairs(server_table) do o:value(k, v) end
 o.default = "nil"
 o.rmempty = false
 
-o = s:option(ListValue, "udp_relay_server", translate("UDP Relay Server"))
+o = s:option(ListValue, "udp_relay_server", translate("UDP-Relay Server"))
 o:value("", translate("Disable"))
 o:value("same", translate("Same as Global Server"))
 for k, v in pairs(server_table) do o:value(k, v) end

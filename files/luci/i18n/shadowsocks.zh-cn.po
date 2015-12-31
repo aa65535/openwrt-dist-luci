@@ -4,17 +4,29 @@ msgstr "Content-Type: text/plain; charset=UTF-8\n"
 msgid "ShadowSocks"
 msgstr "ShadowSocks"
 
+msgid "A lightweight secured SOCKS5 proxy"
+msgstr "一个轻量级安全SOCKS5代理"
+
 msgid "Enable"
 msgstr "启用"
 
 msgid "Disable"
 msgstr "停用"
 
-msgid "ShadowSocks is running"
-msgstr "ShadowSocks 运行中"
+msgid "Running Status"
+msgstr "运行状态"
 
-msgid "ShadowSocks is not running"
-msgstr "ShadowSocks 未运行"
+msgid "Transparent Proxy"
+msgstr "透明代理"
+
+msgid "UDP Forward"
+msgstr "UDP转发"
+
+msgid "RUNNING"
+msgstr "运行中"
+
+msgid "NOT RUNNING"
+msgstr "未运行"
 
 msgid "Global Setting"
 msgstr "全局设置"
@@ -25,8 +37,8 @@ msgstr "全局服务器"
 msgid "Disable ShadowSocks"
 msgstr "停用ShadowSocks"
 
-msgid "UDP Relay Server"
-msgstr "UDP中继服务器"
+msgid "UDP-Relay Server"
+msgstr "UDP服务器"
 
 msgid "Same as Global Server"
 msgstr "与全局服务器相同"
@@ -57,9 +69,6 @@ msgstr "密码"
 
 msgid "Encrypt Method"
 msgstr "加密方式"
-
-msgid "UDP Forward"
-msgstr "UDP转发"
 
 msgid "UDP Local Port"
 msgstr "UDP本地端口"
