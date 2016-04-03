@@ -43,6 +43,9 @@ msgstr "UDP服务器"
 msgid "Same as Global Server"
 msgstr "与全局服务器相同"
 
+msgid "Unusable - Missing iptables-mod-tproxy"
+msgstr "不可用 - iptables-mod-tproxy 缺失"
+
 msgid "Servers Setting"
 msgstr "服务器配置"
 

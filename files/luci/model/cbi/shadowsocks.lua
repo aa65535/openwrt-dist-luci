@@ -5,7 +5,27 @@ openwrt-dist-luci: ShadowSocks
 local m, s, o
 local shadowsocks = "shadowsocks"
 local uci = luci.model.uci.cursor()
-local ipkg = require("luci.model.ipkg")
+
+function is_running(name)
+	return luci.sys.call("pidof " .. name .. " >/dev/null") == 0
+end
+
+function get_status(name)
+	if is_running(name) then
+		return translate("RUNNING")
+	else
+		return translate("NOT RUNNING")
+	end
+end
+
+function is_installed(name)
+	local ipkg = require("luci.model.ipkg")
+	local installed = false
+	ipkg.list_installed(name, function(n, v, d)
+		installed = true
+	end)
+	return installed
+end
 
 local chnroute = uci:get_first("chinadns", "chinadns", "chnroute")
 local server_table = {}
@@ -31,9 +51,9 @@ local encrypt_methods = {
 	"chacha20-ietf",
 }
 
-ipkg.list_installed("shadowsocks-libev-spec-polarssl", function(n, v, d)
+if is_installed("shadowsocks-libev-spec-polarssl") then
 	for i=1,5,1 do table.remove(encrypt_methods, 11) end
-end)
+end
 
 uci:foreach(shadowsocks, "servers", function(s)
 	if s.alias then
@@ -50,18 +70,10 @@ s = m:section(TypedSection, "global", translate("Running Status"))
 s.anonymous = true
 
 o = s:option(DummyValue, "_status", translate("Transparent Proxy"))
-if luci.sys.call("pidof ss-redir >/dev/null") == 0 then
-	o.value = translate("RUNNING")
-else
-	o.value = translate("NOT RUNNING")
-end
+o.value = get_status("ss-redir")
 
 o = s:option(DummyValue, "_status", translate("UDP Forward"))
-if luci.sys.call("pidof ss-tunnel >/dev/null") == 0 then
-	o.value = translate("RUNNING")
-else
-	o.value = translate("NOT RUNNING")
-end
+o.value = get_status("ss-tunnel")
 
 -- [[ Global Setting ]]--
 s = m:section(TypedSection, "global", translate("Global Setting"))
@@ -74,9 +86,13 @@ o.default = "nil"
 o.rmempty = false
 
 o = s:option(ListValue, "udp_relay_server", translate("UDP-Relay Server"))
-o:value("", translate("Disable"))
-o:value("same", translate("Same as Global Server"))
-for k, v in pairs(server_table) do o:value(k, v) end
+if is_installed("iptables-mod-tproxy") then
+	o:value("", translate("Disable"))
+	o:value("same", translate("Same as Global Server"))
+	for k, v in pairs(server_table) do o:value(k, v) end
+else
+	o:value("", translate("Unusable - Missing iptables-mod-tproxy"))
+end
 
 -- [[ Servers Setting ]]--
 s = m:section(TypedSection, "servers", translate("Servers Setting"))
