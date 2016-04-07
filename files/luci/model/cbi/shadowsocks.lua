@@ -2,29 +2,49 @@
 openwrt-dist-luci: ShadowSocks
 ]]--
 
+local pkg_name
+local min_version = "2.4.4-1"
 local m, s, o
 local shadowsocks = "shadowsocks"
 local uci = luci.model.uci.cursor()
+local ipkg = require("luci.model.ipkg")
 
 function is_running(name)
-	return luci.sys.call("pidof " .. name .. " >/dev/null") == 0
+	return luci.sys.call("pidof %s >/dev/null" %{name}) == 0
 end
 
 function get_status(name)
 	if is_running(name) then
 		return translate("RUNNING")
-	else
-		return translate("NOT RUNNING")
 	end
+	return translate("NOT RUNNING")
 end
 
 function is_installed(name)
-	local ipkg = require("luci.model.ipkg")
-	local installed = false
-	ipkg.list_installed(name, function(n, v, d)
-		installed = true
+	return ipkg.installed(name)
+end
+
+function get_version()
+	local version = "1.0.0-1"
+	ipkg.list_installed("shadowsocks-libev-spec", function(n, v, d)
+		pkg_name = n
+		version = v
 	end)
-	return installed
+	return version
+end
+
+function compare_versions(ver1, comp, ver2)
+	if not ver1 or not (#ver1 > 0)
+	or not comp or not (#comp > 0)
+	or not ver2 or not (#ver2 > 0) then
+		return nil
+	end
+	return luci.sys.call("opkg compare-versions '%s' '%s' '%s'" %{ver1, comp, ver2}) == 1
+end
+
+if compare_versions(min_version, ">>", get_version()) then
+	return Map(shadowsocks, translate("ShadowSocks"),
+		'<b style="color:red">Please update the packages: %s</b>' %{pkg_name})
 end
 
 local chnroute = uci:get_first("chinadns", "chinadns", "chnroute")
