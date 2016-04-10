@@ -26,7 +26,7 @@ end
 
 function get_version()
 	local version = "1.0.0-1"
-	ipkg.list_installed("shadowsocks-libev-spec", function(n, v, d)
+	ipkg.list_installed("shadowsocks-libev-spec*", function(n, v, d)
 		pkg_name = n
 		version = v
 	end)
@@ -43,8 +43,11 @@ function compare_versions(ver1, comp, ver2)
 end
 
 if compare_versions(min_version, ">>", get_version()) then
-	return Map(shadowsocks, translate("ShadowSocks"),
-		'<b style="color:red">Please update the packages: %s</b>' %{pkg_name})
+	local tip = 'shadowsocks-libev-spec not found'
+	if pkg_name then
+		tip = 'Please update the packages: %s' %{pkg_name}
+	end
+	return Map(shadowsocks, translate("ShadowSocks"), '<b style="color:red">%s</b>' %{tip})
 end
 
 local chnroute = uci:get_first("chinadns", "chinadns", "chnroute")
