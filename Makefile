@@ -9,7 +9,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=openwrt-dist-luci
-PKG_VERSION:=1.3.8
+PKG_VERSION:=1.3.9
 PKG_RELEASE:=1
 
 PKG_LICENSE:=GPLv3
@@ -26,11 +26,12 @@ define Package/openwrt-dist-luci/Default
 	SUBMENU:=3. Applications
 	TITLE:=$(1) LuCI interface
 	PKGARCH:=all
+	DEPENDS:=$(2)
 endef
 
-Package/luci-app-chinadns = $(call Package/openwrt-dist-luci/Default,ChinaDNS)
-Package/luci-app-redsocks2 = $(call Package/openwrt-dist-luci/Default,RedSocks2)
-Package/luci-app-shadowvpn = $(call Package/openwrt-dist-luci/Default,ShadowVPN)
+Package/luci-app-chinadns = $(call Package/openwrt-dist-luci/Default,ChinaDNS,ChinaDNS)
+Package/luci-app-redsocks2 = $(call Package/openwrt-dist-luci/Default,RedSocks2,redsocks2)
+Package/luci-app-shadowvpn = $(call Package/openwrt-dist-luci/Default,ShadowVPN,ShadowVPN)
 Package/luci-app-shadowsocks-spec = $(call Package/openwrt-dist-luci/Default,shadowsocks-libev-spec)
 
 define Package/openwrt-dist-luci/description
