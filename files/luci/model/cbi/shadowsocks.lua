@@ -200,6 +200,8 @@ o.rmempty = false
 
 o = s:taboption("lan_ac", DynamicList, "lan_ac_ips", translate("LAN Host List"))
 o.datatype = "ipaddr"
-for _, v in ipairs(arp_table) do o:value(v["IP address"]) end
+for _, v in ipairs(arp_table) do
+	o:value(v["IP address"], "%s (%s)" %{v["IP address"], v["HW address"]})
+end
 
 return m
