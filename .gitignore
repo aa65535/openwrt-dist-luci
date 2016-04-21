@@ -1,1 +1,3 @@
 dist/*
+*.lmo
+files/root

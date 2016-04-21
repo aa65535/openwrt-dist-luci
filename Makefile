@@ -20,6 +20,21 @@ PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)
 
 include $(INCLUDE_DIR)/package.mk
 
+define Create/uci-defaults
+	mkdir -p ./files/root/etc/uci-defaults
+	( \
+		echo '#!/bin/sh'; \
+		echo 'uci -q batch <<-EOF >/dev/null'; \
+		echo "	delete ucitrack.@$(1)[-1]"; \
+		echo "	add ucitrack $(1)"; \
+		echo "	set ucitrack.@$(1)[-1].init=$(1)"; \
+		echo '	commit ucitrack'; \
+		echo 'EOF'; \
+		echo 'rm -f /tmp/luci-indexcache'; \
+		echo 'exit 0'; \
+	) > ./files/root/etc/uci-defaults/luci-$(1)
+endef
+
 define Package/openwrt-dist-luci/Default
 	SECTION:=luci
 	CATEGORY:=LuCI
@@ -69,6 +84,7 @@ Package/luci-app-shadowvpn/postinst = $(call Package/openwrt-dist-luci/postinst,
 Package/luci-app-shadowsocks-spec/postinst = $(call Package/openwrt-dist-luci/postinst,shadowsocks)
 
 define Package/openwrt-dist-luci/install
+	$(call Create/uci-defaults,$(2))
 	$(INSTALL_DIR) $(1)/usr/lib/lua/luci/controller
 	$(INSTALL_DATA) ./files/luci/controller/$(2).lua $(1)/usr/lib/lua/luci/controller/$(2).lua
 	$(INSTALL_DIR) $(1)/usr/lib/lua/luci/i18n
