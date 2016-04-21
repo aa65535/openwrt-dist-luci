@@ -21,7 +21,6 @@ PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)
 include $(INCLUDE_DIR)/package.mk
 
 define Create/uci-defaults
-	mkdir -p ./files/root/etc/uci-defaults
 	( \
 		echo '#!/bin/sh'; \
 		echo 'uci -q batch <<-EOF >/dev/null'; \
@@ -32,7 +31,7 @@ define Create/uci-defaults
 		echo 'EOF'; \
 		echo 'rm -f /tmp/luci-indexcache'; \
 		echo 'exit 0'; \
-	) > ./files/root/etc/uci-defaults/luci-$(1)
+	) > $(PKG_BUILD_DIR)/luci-$(1)
 endef
 
 define Package/openwrt-dist-luci/Default
@@ -59,7 +58,8 @@ Package/luci-app-shadowvpn/description = $(call Package/openwrt-dist-luci/descri
 Package/luci-app-shadowsocks-spec/description = $(call Package/openwrt-dist-luci/description,shadowsocks-libev-spec)
 
 define Build/Prepare
-	$(foreach po,$(wildcard ${CURDIR}/files/luci/i18n/*.po),po2lmo $(po) $(po:%.po=%.lmo);)
+	$(foreach po,$(wildcard ${CURDIR}/files/luci/i18n/*.po), \
+		po2lmo $(po) $(PKG_BUILD_DIR)/$(patsubst %.po,%.lmo,$(notdir $(po)));)
 endef
 
 define Build/Configure
@@ -88,11 +88,11 @@ define Package/openwrt-dist-luci/install
 	$(INSTALL_DIR) $(1)/usr/lib/lua/luci/controller
 	$(INSTALL_DATA) ./files/luci/controller/$(2).lua $(1)/usr/lib/lua/luci/controller/$(2).lua
 	$(INSTALL_DIR) $(1)/usr/lib/lua/luci/i18n
-	$(INSTALL_DATA) ./files/luci/i18n/$(2).*.lmo $(1)/usr/lib/lua/luci/i18n
+	$(INSTALL_DATA) $(PKG_BUILD_DIR)/$(2).*.lmo $(1)/usr/lib/lua/luci/i18n
 	$(INSTALL_DIR) $(1)/usr/lib/lua/luci/model/cbi
 	$(INSTALL_DATA) ./files/luci/model/cbi/$(2).lua $(1)/usr/lib/lua/luci/model/cbi/$(2).lua
 	$(INSTALL_DIR) $(1)/etc/uci-defaults
-	$(INSTALL_BIN) ./files/root/etc/uci-defaults/luci-$(2) $(1)/etc/uci-defaults/luci-$(2)
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/luci-$(2) $(1)/etc/uci-defaults/luci-$(2)
 endef
 
 Package/luci-app-chinadns/install = $(call Package/openwrt-dist-luci/install,$(1),chinadns)
