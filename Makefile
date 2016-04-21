@@ -44,6 +44,7 @@ Package/luci-app-shadowvpn/description = $(call Package/openwrt-dist-luci/descri
 Package/luci-app-shadowsocks-spec/description = $(call Package/openwrt-dist-luci/description,shadowsocks-libev-spec)
 
 define Build/Prepare
+	$(foreach po,$(wildcard ${CURDIR}/files/luci/i18n/*.po),po2lmo $(po) $(po:%.po=%.lmo);)
 endef
 
 define Build/Configure
