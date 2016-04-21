@@ -33,6 +33,10 @@ tar xjf OpenWrt-SDK-ar71xx-for-linux-x86_64-gcc-4.8-linaro_uClibc-0.9.33.2.tar.b
 cd OpenWrt-SDK-ar71xx-*
 # 获取 Makefile
 git clone https://github.com/aa65535/openwrt-dist-luci.git package/openwrt-dist-luci
+# 第一次需要编译 po2lmo
+pushd package/openwrt-dist-luci/tools/po2lmo
+make && sudo make install
+popd
 # 选择要编译的包 LuCI -> 3. Applications
 make menuconfig
 # 开始编译
