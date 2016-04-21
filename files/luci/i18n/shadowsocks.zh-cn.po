@@ -1,59 +1,92 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8\n"
 
-msgid "ShadowSocks"
-msgstr "ShadowSocks"
-
 msgid "A lightweight secured SOCKS5 proxy"
 msgstr "一个轻量级安全SOCKS5代理"
 
-msgid "Enable"
-msgstr "启用"
-
-msgid "Disable"
-msgstr "停用"
-
-msgid "Running Status"
-msgstr "运行状态"
-
-msgid "Transparent Proxy"
-msgstr "透明代理"
-
-msgid "UDP Forward"
-msgstr "UDP转发"
-
-msgid "RUNNING"
-msgstr "运行中"
-
-msgid "NOT RUNNING"
-msgstr "未运行"
-
-msgid "Global Setting"
-msgstr "全局设置"
-
-msgid "Global Server"
-msgstr "全局服务器"
-
-msgid "Disable ShadowSocks"
-msgstr "停用ShadowSocks"
-
-msgid "UDP-Relay Server"
-msgstr "UDP服务器"
-
-msgid "Same as Global Server"
-msgstr "与全局服务器相同"
-
-msgid "Unusable - Missing iptables-mod-tproxy"
-msgstr "不可用 - iptables-mod-tproxy 缺失"
-
-msgid "Servers Setting"
-msgstr "服务器配置"
+msgid "Access Control"
+msgstr "访问控制"
 
 msgid "Alias(optional)"
 msgstr "别名(可选)"
 
+msgid "Allow all except listed"
+msgstr "仅允许列表外"
+
+msgid "Allow listed only"
+msgstr "仅允许列表内"
+
+msgid "Bypassed IP List"
+msgstr "被忽略IP列表"
+
+msgid "Bypassed IP"
+msgstr "额外被忽略IP"
+
+msgid "ChinaDNS CHNRoute"
+msgstr "ChinaDNS路由表"
+
+msgid "Connection Timeout"
+msgstr "连接超时"
+
+msgid "Disable ShadowSocks"
+msgstr "停用ShadowSocks"
+
+msgid "Disable"
+msgstr "停用"
+
+msgid "Enable"
+msgstr "启用"
+
+msgid "Encrypt Method"
+msgstr "加密方式"
+
+msgid "Forwarded IP"
+msgstr "强制走代理IP"
+
+msgid "Forwarding Tunnel"
+msgstr "UDP转发地址"
+
+msgid "Global Server"
+msgstr "全局服务器"
+
+msgid "Global Setting"
+msgstr "全局设置"
+
+msgid "Interfaces - LAN"
+msgstr "接口 - LAN"
+
+msgid "Interfaces - WAN"
+msgstr "接口 - WAN"
+
+msgid "LAN Access Control"
+msgstr "内网访问控制"
+
+msgid "LAN Host List"
+msgstr "内网主机列表"
+
+msgid "Local Port"
+msgstr "本地端口"
+
+msgid "NOT RUNNING"
+msgstr "未运行"
+
+msgid "NULL - As Global Proxy"
+msgstr "留空 - 作为全局代理"
+
 msgid "Onetime Authentication"
 msgstr "一次验证"
+
+msgid "Password"
+msgstr "密码"
+
+msgid "Running Status"
+msgstr "运行状态"
+
+msgid "RUNNING"
+msgstr "运行中"
+
+msgid "Same as Global Server"
+msgstr "与全局服务器相同"
 
 msgid "Server Address"
 msgstr "服务器地址"
@@ -61,56 +94,23 @@ msgstr "服务器地址"
 msgid "Server Port"
 msgstr "服务器端口"
 
-msgid "Local Port"
-msgstr "本地端口"
+msgid "Servers Setting"
+msgstr "服务器配置"
 
-msgid "Connection Timeout"
-msgstr "连接超时"
+msgid "ShadowSocks"
+msgstr "ShadowSocks"
 
-msgid "Password"
-msgstr "密码"
+msgid "Transparent Proxy"
+msgstr "透明代理"
 
-msgid "Encrypt Method"
-msgstr "加密方式"
+msgid "UDP Forward"
+msgstr "UDP转发"
 
 msgid "UDP Local Port"
 msgstr "UDP本地端口"
 
-msgid "Forwarding Tunnel"
-msgstr "UDP转发地址"
+msgid "UDP-Relay Server"
+msgstr "UDP服务器"
 
-msgid "Access Control"
-msgstr "访问控制"
-
-msgid "Interfaces - WAN"
-msgstr "接口 - WAN"
-
-msgid "Bypassed IP List"
-msgstr "被忽略IP列表"
-
-msgid "NULL - As Global Proxy"
-msgstr "留空 - 作为全局代理"
-
-msgid "ChinaDNS CHNRoute"
-msgstr "ChinaDNS路由表"
-
-msgid "Bypassed IP"
-msgstr "额外被忽略IP"
-
-msgid "Forwarded IP"
-msgstr "强制走代理IP"
-
-msgid "Interfaces - LAN"
-msgstr "接口 - LAN"
-
-msgid "LAN Access Control"
-msgstr "内网访问控制"
-
-msgid "Allow listed only"
-msgstr "仅允许列表内"
-
-msgid "Allow all except listed"
-msgstr "仅允许列表外"
-
-msgid "LAN Host List"
-msgstr "内网主机列表"
+msgid "Unusable - Missing iptables-mod-tproxy"
+msgstr "不可用 - iptables-mod-tproxy 缺失"

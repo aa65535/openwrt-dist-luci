@@ -1,32 +1,32 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8\n"
 
-msgid "ChinaDNS"
-msgstr "ChinaDNS"
-
-msgid "ChinaDNS is running"
-msgstr "ChinaDNS 运行中"
+msgid "Also filter results inside China from foreign DNS servers"
+msgstr "同时过滤从国外DNS返回的IP为国内的结果"
 
 msgid "ChinaDNS is not running"
 msgstr "ChinaDNS 未运行"
 
-msgid "General Setting"
-msgstr "基本设置"
+msgid "ChinaDNS is running"
+msgstr "ChinaDNS 运行中"
 
-msgid "Enable"
-msgstr "启用"
+msgid "ChinaDNS"
+msgstr "ChinaDNS"
+
+msgid "CHNRoute File"
+msgstr "国内路由表"
 
 msgid "Enable Bidirectional Filter"
 msgstr "启用双向过滤"
 
-msgid "Also filter results inside China from foreign DNS servers"
-msgstr "同时过滤从国外DNS返回的IP为国内的结果"
+msgid "Enable"
+msgstr "启用"
+
+msgid "General Setting"
+msgstr "基本设置"
 
 msgid "Local Port"
 msgstr "本地端口"
-
-msgid "CHNRoute File"
-msgstr "国内路由表"
 
 msgid "Upstream Servers"
 msgstr "上游服务器"
