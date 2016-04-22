@@ -29,7 +29,7 @@ popd
 # 选择要编译的包 LuCI -> 3. Applications
 make menuconfig
 # 开始编译
-make V=99
+make package/openwrt-dist-luci/compile V=99
 ```
 
 
