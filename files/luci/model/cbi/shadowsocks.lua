@@ -109,13 +109,9 @@ o.default = "nil"
 o.rmempty = false
 
 o = s:option(ListValue, "udp_relay_server", translate("UDP-Relay Server"))
-if is_installed("iptables-mod-tproxy") then
-	o:value("", translate("Disable"))
-	o:value("same", translate("Same as Global Server"))
-	for k, v in pairs(server_table) do o:value(k, v) end
-else
-	o:value("", translate("Unusable - Missing iptables-mod-tproxy"))
-end
+o:value("", translate("Disable"))
+o:value("same", translate("Same as Global Server"))
+for k, v in pairs(server_table) do o:value(k, v) end
 
 -- [[ Servers Setting ]]--
 s = m:section(TypedSection, "servers", translate("Servers Setting"))
