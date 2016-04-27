@@ -111,6 +111,3 @@ msgstr "UDP本地端口"
 
 msgid "UDP-Relay Server"
 msgstr "UDP服务器"
-
-msgid "Unusable - Missing iptables-mod-tproxy"
-msgstr "不可用 - iptables-mod-tproxy 缺失"
