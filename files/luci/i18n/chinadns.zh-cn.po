@@ -1,6 +1,9 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8\n"
 
+msgid "Also filter results inside China from foreign DNS servers"
+msgstr "同时过滤从国外DNS返回的IP为国内的结果"
+
 msgid "ChinaDNS"
 msgstr "ChinaDNS"
 
@@ -18,9 +21,6 @@ msgstr "启用"
 
 msgid "Enable Bidirectional Filter"
 msgstr "启用双向过滤"
-
-msgid "Also filter results inside China from foreign DNS servers"
-msgstr "同时过滤从国外DNS返回的IP为国内的结果"
 
 msgid "Local Port"
 msgstr "本地端口"
