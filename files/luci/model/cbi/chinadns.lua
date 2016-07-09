@@ -33,11 +33,9 @@ o.default = "/etc/chinadns_chnroute.txt"
 o.datatype = "file"
 o.rmempty = false
 
-o = s:option(Value, "server",
-	translate("Upstream Servers"),
-	translate("Use commas to separate multiple ip address"))
-o.placeholder = "114.114.114.114,208.67.222.222:443,8.8.8.8"
-o.default = "114.114.114.114,208.67.222.222:443,8.8.8.8"
+o = s:option(DynamicList, "server", translate("Upstream Servers"),
+	translate("List of <abbr title=\"Domain Name System\">DNS</abbr> servers to forward requests"))
+o.optional = false
+o.placeholder = "8.8.8.8"
 o.rmempty = false
-
 return m
