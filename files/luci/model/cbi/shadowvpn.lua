@@ -36,14 +36,12 @@ o = s:option(Value, "password", translate("Password"))
 o.password = true
 o.rmempty = false
 
---[[
 o = s:option(Value, "concurrency",
 	translate("Concurrency Number"),
 	translate("Must be the same value with server"))
 o.default = 1
 o.datatype = "uinteger"
 o.rmempty = false
-]]--
 
 o = s:option(Value, "net", translate("Local Subnet"))
 o.placeholder = "10.7.0.2/24"
