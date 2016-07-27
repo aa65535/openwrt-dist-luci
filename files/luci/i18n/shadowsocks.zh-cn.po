@@ -16,6 +16,9 @@ msgstr "仅允许列表外"
 msgid "Allow listed only"
 msgstr "仅允许列表内"
 
+msgid "Bypassed"
+msgstr "绕过"
+
 msgid "Bypassed IP List"
 msgstr "被忽略IP列表"
 
@@ -27,6 +30,9 @@ msgstr "ChinaDNS路由表"
 
 msgid "Connection Timeout"
 msgstr "连接超时"
+
+msgid "Default Action"
+msgstr "默认行为"
 
 msgid "Disable ShadowSocks"
 msgstr "停用ShadowSocks"
@@ -46,11 +52,17 @@ msgstr "强制走代理IP"
 msgid "Forwarding Tunnel"
 msgstr "UDP转发地址"
 
+msgid "Global"
+msgstr "全局"
+
 msgid "Global Server"
 msgstr "全局服务器"
 
 msgid "Global Setting"
 msgstr "全局设置"
+
+msgid "Hosts Action"
+msgstr "主机行为"
 
 msgid "Interfaces - LAN"
 msgstr "接口 - LAN"
@@ -58,14 +70,11 @@ msgstr "接口 - LAN"
 msgid "Interfaces - WAN"
 msgstr "接口 - WAN"
 
-msgid "LAN Access Control"
-msgstr "内网访问控制"
-
-msgid "LAN Host List"
-msgstr "内网主机列表"
-
 msgid "Local Port"
 msgstr "本地端口"
+
+msgid "Normal"
+msgstr "常规"
 
 msgid "NOT RUNNING"
 msgstr "未运行"

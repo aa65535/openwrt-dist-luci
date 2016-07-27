@@ -3,7 +3,7 @@ openwrt-dist-luci: ShadowSocks
 ]]--
 
 local pkg_name
-local min_version = "2.4.4-1"
+local min_version = "2.4.8-2"
 local m, s, o
 local shadowsocks = "shadowsocks"
 local uci = luci.model.uci.cursor()
@@ -45,7 +45,7 @@ end
 if compare_versions(min_version, ">>", get_version()) then
 	local tip = 'shadowsocks-libev-spec not found'
 	if pkg_name then
-		tip = 'Please update the packages: %s' %{pkg_name}
+		tip = 'Please upgrade %s to v%s and above.' %{pkg_name, min_version}
 	end
 	return Map(shadowsocks, translate("ShadowSocks"), '<b style="color:red">%s</b>' %{tip})
 end
@@ -192,16 +192,25 @@ o.datatype = "ip4addr"
 -- Part of LAN
 s:tab("lan_ac", translate("Interfaces - LAN"))
 
-o = s:taboption("lan_ac", ListValue, "lan_ac_mode", translate("LAN Access Control"))
-o:value("0", translate("Disable"))
-o:value("w", translate("Allow listed only"))
-o:value("b", translate("Allow all except listed"))
+o = s:taboption("lan_ac", DynamicList, "interface", translate("Interface"))
+o.template = "cbi/network_netlist"
+o.nocreate = true
+o.unspecified = false
+o.widget = "checkbox"
+o.default = "lan"
 o.rmempty = false
 
-o = s:taboption("lan_ac", DynamicList, "lan_ac_ips", translate("LAN Host List"))
-o.datatype = "ipaddr"
+o = s:taboption("lan_ac", ListValue, "lan_default_target", translate("Default Action"))
+o:value("SS_SPEC_WAN_AC", translate("Normal"))
+o:value("RETURN", translate("Bypassed"))
+o:value("SS_SPEC_WAN_FW", translate("Global"))
+o.default = "SS_SPEC_WAN_AC"
+
+o = s:taboption("lan_ac", DynamicList, "lan_hosts_action", translate("Hosts Action"))
 for _, v in ipairs(arp_table) do
-	o:value(v["IP address"], "%s (%s)" %{v["IP address"], v["HW address"]})
+	o:value("b,%s" %{v["IP address"]}, "%s %s (%s)" %{translate("Bypassed"), v["IP address"], v["HW address"]})
+	o:value("g,%s" %{v["IP address"]}, "%s %s (%s)" %{translate("Global"), v["IP address"], v["HW address"]})
+	o:value("n,%s" %{v["IP address"]}, "%s %s (%s)" %{translate("Normal"), v["IP address"], v["HW address"]})
 end
 
 return m
