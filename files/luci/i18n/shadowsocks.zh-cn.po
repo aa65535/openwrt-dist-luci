@@ -64,12 +64,6 @@ msgstr "全局设置"
 msgid "Hosts Action"
 msgstr "主机行为"
 
-msgid "Interfaces - LAN"
-msgstr "接口 - LAN"
-
-msgid "Interfaces - WAN"
-msgstr "接口 - WAN"
-
 msgid "Local Port"
 msgstr "本地端口"
 
@@ -123,3 +117,9 @@ msgstr "UDP服务器"
 
 msgid "Unusable - Missing iptables-mod-tproxy"
 msgstr "不可用 - iptables-mod-tproxy 缺失"
+
+msgid "Zone LAN"
+msgstr "LAN 区域"
+
+msgid "Zone WAN"
+msgstr "WAN 区域"
