@@ -2,14 +2,12 @@
 openwrt-dist-luci: ShadowSocks
 ]]--
 
+local m, s, o
 local pkg_name
 local min_version = "2.4.8-2"
-local m, s, o
 local shadowsocks = "shadowsocks"
-local uci = luci.model.uci.cursor()
 local ipkg = require("luci.model.ipkg")
-local nwm = require("luci.model.network").init()
-local fwm = require("luci.model.firewall").init()
+local uci = luci.model.uci.cursor()
 
 function is_running(name)
 	return luci.sys.call("pidof %s >/dev/null" %{name}) == 0
@@ -49,12 +47,10 @@ if compare_versions(min_version, ">>", get_version()) then
 	if pkg_name then
 		tip = 'Please upgrade %s to v%s and above.' %{pkg_name, min_version}
 	end
-	return Map(shadowsocks, translate("ShadowSocks"), '<b style="color:red">%s</b>' %{tip})
+	return Map(shadowsocks, "%s - %s" %{translate("ShadowSocks"), translate("General Settings")}, '<b style="color:red">%s</b>' %{tip})
 end
 
-local chnroute = uci:get_first("chinadns", "chinadns", "chnroute")
 local server_table = {}
-local arp_table = luci.sys.net.arptable() or {}
 local encrypt_methods = {
 	"table",
 	"rc4",
@@ -88,7 +84,7 @@ uci:foreach(shadowsocks, "servers", function(s)
 	end
 end)
 
-m = Map(shadowsocks, translate("ShadowSocks"), translate("A lightweight secured SOCKS5 proxy"))
+m = Map(shadowsocks, "%s - %s" %{translate("ShadowSocks"), translate("General Settings")})
 
 -- [[ Running Status ]]--
 s = m:section(TypedSection, "global", translate("Running Status"))
@@ -171,50 +167,5 @@ o.rmempty = false
 o = s:option(Value, "tunnel_forward", translate("Forwarding Tunnel"))
 o.default = "8.8.4.4:53"
 o.rmempty = false
-
--- [[ Access Control ]]--
-s = m:section(TypedSection, "access_control", translate("Access Control"))
-s.anonymous = true
-
--- Part of WAN
-s:tab("wan_ac", translate("Zone WAN"))
-
-o = s:taboption("wan_ac", Value, "wan_bp_list", translate("Bypassed IP List"))
-o:value("/dev/null", translate("NULL - As Global Proxy"))
-if chnroute then o:value(chnroute, translate("ChinaDNS CHNRoute")) end
-o.default = "/dev/null"
-o.rmempty = false
-
-o = s:taboption("wan_ac", DynamicList, "wan_bp_ips", translate("Bypassed IP"))
-o.datatype = "ip4addr"
-
-o = s:taboption("wan_ac", DynamicList, "wan_fw_ips", translate("Forwarded IP"))
-o.datatype = "ip4addr"
-
--- Part of LAN
-s:tab("lan_ac", translate("Zone LAN"))
-
-o = s:taboption("lan_ac", MultiValue, "lan_ifaces", translate("Interface"))
-for _, zone in ipairs(fwm:get_zones()) do
-	if string.find(zone:name(), "wan") ~= 1 then
-		local net = nwm:get_network(zone:name())
-		local device = net and net:get_interface()
-		if device then
-			o:value(device:name(), device:get_i18n())
-		end
-	end
-end
-
-o = s:taboption("lan_ac", ListValue, "lan_default_target", translate("Default Action"))
-o:value("SS_SPEC_WAN_AC", translate("Normal"))
-o:value("RETURN", translate("Bypassed"))
-o:value("SS_SPEC_WAN_FW", translate("Global"))
-
-o = s:taboption("lan_ac", DynamicList, "lan_hosts_action", translate("Hosts Action"))
-for _, v in ipairs(arp_table) do
-	o:value("b,%s" %{v["IP address"]}, "%s %s (%s)" %{translate("Bypassed"), v["IP address"], v["HW address"]})
-	o:value("g,%s" %{v["IP address"]}, "%s %s (%s)" %{translate("Global"), v["IP address"], v["HW address"]})
-	o:value("n,%s" %{v["IP address"]}, "%s %s (%s)" %{translate("Normal"), v["IP address"], v["HW address"]})
-end
 
 return m

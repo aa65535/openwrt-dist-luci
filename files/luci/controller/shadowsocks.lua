@@ -9,5 +9,15 @@ function index()
 		return
 	end
 
-	entry({"admin", "services", "shadowsocks"}, cbi("shadowsocks"), _("ShadowSocks"), 74).dependent = true
+	entry({"admin", "services", "shadowsocks"},
+		alias("admin", "services", "shadowsocks", "general"),
+		_("ShadowSocks"), 74).dependent = true
+
+	entry({"admin", "services", "shadowsocks", "general"},
+		cbi("shadowsocks/general"),
+		_("General Settings"), 10).leaf = true
+
+	entry({"admin", "services", "shadowsocks", "access-control"},
+		cbi("shadowsocks/access-control"),
+		_("Access Control"), 20).leaf = true
 end

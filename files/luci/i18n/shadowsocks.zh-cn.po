@@ -1,9 +1,6 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8\n"
 
-msgid "A lightweight secured SOCKS5 proxy"
-msgstr "一个轻量级安全SOCKS5代理"
-
 msgid "Access Control"
 msgstr "访问控制"
 
@@ -61,6 +58,9 @@ msgstr "全局服务器"
 msgid "Global Setting"
 msgstr "全局设置"
 
+msgid "Hosts IP"
+msgstr "主机 IP"
+
 msgid "Hosts Action"
 msgstr "主机行为"
 
@@ -101,7 +101,7 @@ msgid "Servers Setting"
 msgstr "服务器配置"
 
 msgid "ShadowSocks"
-msgstr "ShadowSocks"
+msgstr "影梭"
 
 msgid "Transparent Proxy"
 msgstr "透明代理"
