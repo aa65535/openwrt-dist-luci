@@ -46,7 +46,7 @@ endef
 Package/luci-app-chinadns = $(call Package/openwrt-dist-luci/Default,ChinaDNS,+ChinaDNS)
 Package/luci-app-redsocks2 = $(call Package/openwrt-dist-luci/Default,RedSocks2,+redsocks2)
 Package/luci-app-shadowvpn = $(call Package/openwrt-dist-luci/Default,ShadowVPN,+ShadowVPN)
-Package/luci-app-shadowsocks-spec = $(call Package/openwrt-dist-luci/Default,shadowsocks-libev-spec)
+Package/luci-app-shadowsocks-spec = $(call Package/openwrt-dist-luci/Default,shadowsocks-libev-spec, +shadowsocks-libev-spec)
 
 define Package/openwrt-dist-luci/description
 	LuCI Support for $(1).
