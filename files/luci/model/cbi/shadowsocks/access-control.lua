@@ -4,19 +4,11 @@ openwrt-dist-luci: ShadowSocks
 
 local m, s, o
 local pkg_name
+local version = "1.0.0-1"
 local min_version = "2.4.8-2"
 local shadowsocks = "shadowsocks"
 local ipkg = require("luci.model.ipkg")
 local uci = luci.model.uci.cursor()
-
-function get_version()
-	local version = "1.0.0-1"
-	ipkg.list_installed("shadowsocks-libev-spec*", function(n, v, d)
-		pkg_name = n
-		version = v
-	end)
-	return version
-end
 
 function compare_versions(ver1, comp, ver2)
 	if not ver1 or not (#ver1 > 0)
@@ -27,11 +19,12 @@ function compare_versions(ver1, comp, ver2)
 	return luci.sys.call("opkg compare-versions '%s' '%s' '%s'" %{ver1, comp, ver2}) == 1
 end
 
-local nwm = require("luci.model.network").init()
-local fwm = require("luci.model.firewall").init()
-local chnroute = uci:get_first("chinadns", "chinadns", "chnroute")
+ipkg.list_installed("shadowsocks-libev-spec", function(n, v, d)
+	version = v
+	pkg_name = n
+end)
 
-if compare_versions(min_version, ">>", get_version()) then
+if compare_versions(min_version, ">>", version) then
 	local tip = 'shadowsocks-libev-spec not found'
 	if pkg_name then
 		tip = 'Please upgrade %s to v%s and above.' %{pkg_name, min_version}
@@ -39,9 +32,13 @@ if compare_versions(min_version, ">>", get_version()) then
 	return Map(shadowsocks, "%s - %s" %{translate("ShadowSocks"), translate("Access Control")}, '<b style="color:red">%s</b>' %{tip})
 end
 
+local nwm = require("luci.model.network").init()
+local fwm = require("luci.model.firewall").init()
+local chnroute = uci:get_first("chinadns", "chinadns", "chnroute")
+
 m = Map(shadowsocks, "%s - %s" %{translate("ShadowSocks"), translate("Access Control")})
 
--- Zone WAN
+-- [[ Zone WAN ]]--
 s = m:section(TypedSection, "access_control", translate("Zone WAN"))
 s.anonymous = true
 
@@ -58,7 +55,7 @@ o.datatype = "ip4addr"
 o = s:option(DynamicList, "wan_fw_ips", translate("Forwarded IP"))
 o.datatype = "ip4addr"
 
--- Zone LAN
+-- [[ Zone LAN ]]--
 s = m:section(TypedSection, "access_control", translate("Zone LAN"))
 s.anonymous = true
 
@@ -78,7 +75,7 @@ o:value("SS_SPEC_WAN_AC", translate("Normal"))
 o:value("RETURN", translate("Bypassed"))
 o:value("SS_SPEC_WAN_FW", translate("Global"))
 
--- Hosts Action
+-- [[ Hosts Action ]]--
 s = m:section(TypedSection, "lan_hosts_action", translate("Hosts Action"))
 s.template  = "cbi/tblsection"
 s.addremove = true

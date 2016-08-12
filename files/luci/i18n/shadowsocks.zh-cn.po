@@ -7,12 +7,6 @@ msgstr "访问控制"
 msgid "Alias(optional)"
 msgstr "别名(可选)"
 
-msgid "Allow all except listed"
-msgstr "仅允许列表外"
-
-msgid "Allow listed only"
-msgstr "仅允许列表内"
-
 msgid "Bypassed"
 msgstr "绕过"
 
@@ -31,6 +25,9 @@ msgstr "连接超时"
 msgid "Default Action"
 msgstr "默认行为"
 
+msgid "Destination"
+msgstr "目标地址"
+
 msgid "Disable ShadowSocks"
 msgstr "停用ShadowSocks"
 
@@ -45,9 +42,6 @@ msgstr "加密方式"
 
 msgid "Forwarded IP"
 msgstr "强制走代理IP"
-
-msgid "Forwarding Tunnel"
-msgstr "UDP转发地址"
 
 msgid "Global"
 msgstr "全局"
@@ -82,11 +76,14 @@ msgstr "一次验证"
 msgid "Password"
 msgstr "密码"
 
-msgid "Running Status"
-msgstr "运行状态"
+msgid "Port Forward"
+msgstr "端口转发"
 
 msgid "RUNNING"
 msgstr "运行中"
+
+msgid "Running Status"
+msgstr "运行状态"
 
 msgid "Same as Global Server"
 msgstr "与全局服务器相同"
@@ -105,12 +102,6 @@ msgstr "影梭"
 
 msgid "Transparent Proxy"
 msgstr "透明代理"
-
-msgid "UDP Forward"
-msgstr "UDP转发"
-
-msgid "UDP Local Port"
-msgstr "UDP本地端口"
 
 msgid "UDP-Relay Server"
 msgstr "UDP服务器"
