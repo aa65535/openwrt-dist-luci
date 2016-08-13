@@ -45,7 +45,7 @@ s.anonymous = true
 o = s:option(Value, "wan_bp_list", translate("Bypassed IP List"))
 o:value("/dev/null", translate("NULL - As Global Proxy"))
 if chnroute then o:value(chnroute, translate("ChinaDNS CHNRoute")) end
-o.datatype = "file"
+o.datatype = "or(file, '/dev/null')"
 o.default = chnroute or "/dev/null"
 o.rmempty = false
 
@@ -70,26 +70,26 @@ for _, zone in ipairs(fwm:get_zones()) do
 	end
 end
 
-o = s:option(ListValue, "lan_default_target", translate("Default Action"))
+o = s:option(ListValue, "lan_target", translate("Proxy Type"))
 o:value("SS_SPEC_WAN_AC", translate("Normal"))
-o:value("RETURN", translate("Bypassed"))
+o:value("RETURN", translate("Direct"))
 o:value("SS_SPEC_WAN_FW", translate("Global"))
 
--- [[ Hosts Action ]]--
-s = m:section(TypedSection, "lan_hosts_action", translate("Hosts Action"))
+-- [[ LAN Hosts ]]--
+s = m:section(TypedSection, "lan_hosts", translate("LAN Hosts"))
 s.template  = "cbi/tblsection"
 s.addremove = true
 s.anonymous = true
 
-o = s:option(Value, "host", translate("Hosts IP"))
+o = s:option(Value, "host", translate("Host"))
 luci.sys.net.ipv4_hints(function(ip, name)
 	o:value(ip, "%s (%s)" %{ip, name})
 end)
 o.datatype = "ip4addr"
 o.rmempty  = false
 
-o = s:option(ListValue, "action", translate("Hosts Action"))
-o:value("b", translatef("Bypassed"))
+o = s:option(ListValue, "type", translate("Proxy Type"))
+o:value("b", translatef("Direct"))
 o:value("g", translatef("Global"))
 o:value("n", translatef("Normal"))
 o.rmempty  = false

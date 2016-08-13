@@ -7,9 +7,6 @@ msgstr "访问控制"
 msgid "Alias(optional)"
 msgstr "别名(可选)"
 
-msgid "Bypassed"
-msgstr "绕过"
-
 msgid "Bypassed IP List"
 msgstr "被忽略IP列表"
 
@@ -22,11 +19,11 @@ msgstr "ChinaDNS路由表"
 msgid "Connection Timeout"
 msgstr "连接超时"
 
-msgid "Default Action"
-msgstr "默认行为"
-
 msgid "Destination"
 msgstr "目标地址"
+
+msgid "Direct"
+msgstr "直接连接"
 
 msgid "Disable ShadowSocks"
 msgstr "停用ShadowSocks"
@@ -44,7 +41,7 @@ msgid "Forwarded IP"
 msgstr "强制走代理IP"
 
 msgid "Global"
-msgstr "全局"
+msgstr "全局代理"
 
 msgid "Global Server"
 msgstr "全局服务器"
@@ -52,17 +49,17 @@ msgstr "全局服务器"
 msgid "Global Setting"
 msgstr "全局设置"
 
-msgid "Hosts IP"
-msgstr "主机 IP"
+msgid "Host"
+msgstr "主机"
 
-msgid "Hosts Action"
-msgstr "主机行为"
+msgid "LAN Hosts"
+msgstr "内网主机"
 
 msgid "Local Port"
 msgstr "本地端口"
 
 msgid "Normal"
-msgstr "常规"
+msgstr "正常代理"
 
 msgid "NOT RUNNING"
 msgstr "未运行"
@@ -103,6 +100,9 @@ msgstr "影梭"
 msgid "Transparent Proxy"
 msgstr "透明代理"
 
+msgid "Proxy Type"
+msgstr "代理类型"
+
 msgid "UDP-Relay Server"
 msgstr "UDP服务器"
 
@@ -110,7 +110,7 @@ msgid "Unusable - Missing iptables-mod-tproxy"
 msgstr "不可用 - iptables-mod-tproxy 缺失"
 
 msgid "Zone LAN"
-msgstr "LAN 区域"
+msgstr "内网区域"
 
 msgid "Zone WAN"
-msgstr "WAN 区域"
+msgstr "外网区域"

@@ -9,6 +9,30 @@ local min_version = "2.4.8-2"
 local shadowsocks = "shadowsocks"
 local ipkg = require("luci.model.ipkg")
 local uci = luci.model.uci.cursor()
+local server_table = {}
+local encrypt_methods = {
+	"table",
+	"rc4",
+	"rc4-md5",
+	"aes-128-cfb",
+	"aes-192-cfb",
+	"aes-256-cfb",
+	"aes-128-ctr",
+	"aes-192-ctr",
+	"aes-256-ctr",
+	"bf-cfb",
+	"camellia-128-cfb",
+	"camellia-192-cfb",
+	"camellia-256-cfb",
+	"cast5-cfb",
+	"des-cfb",
+	"idea-cfb",
+	"rc2-cfb",
+	"seed-cfb",
+	"salsa20",
+	"chacha20",
+	"chacha20-ietf",
+}
 
 function is_running(name)
 	return luci.sys.call("pidof %s >/dev/null" %{name}) == 0
@@ -43,31 +67,6 @@ if compare_versions(min_version, ">>", version) then
 	return Map(shadowsocks, "%s - %s" %{translate("ShadowSocks"), translate("General Settings")}, '<b style="color:red">%s</b>' %{tip})
 end
 
-local encrypt_methods = {
-	"table",
-	"rc4",
-	"rc4-md5",
-	"aes-128-cfb",
-	"aes-192-cfb",
-	"aes-256-cfb",
-	"aes-128-ctr",
-	"aes-192-ctr",
-	"aes-256-ctr",
-	"bf-cfb",
-	"camellia-128-cfb",
-	"camellia-192-cfb",
-	"camellia-256-cfb",
-	"cast5-cfb",
-	"des-cfb",
-	"idea-cfb",
-	"rc2-cfb",
-	"seed-cfb",
-	"salsa20",
-	"chacha20",
-	"chacha20-ietf",
-}
-
-local server_table = {}
 uci:foreach(shadowsocks, "servers", function(s)
 	if s.alias then
 		server_table[s[".name"]] = s.alias
@@ -118,7 +117,7 @@ o = s:option(Flag, "auth", translate("Onetime Authentication"))
 o.rmempty = false
 
 o = s:option(Value, "server", translate("Server Address"))
-o.datatype = "ipaddr"
+o.datatype = "ip4addr"
 o.rmempty = false
 
 o = s:option(Value, "server_port", translate("Server Port"))
@@ -159,12 +158,5 @@ o.rmempty = false
 o = s:option(Value, "destination", translate("Destination"))
 o.default = "8.8.4.4:53"
 o.rmempty = false
-
-function o.validate(self, value, section)
-	if not string.find(value, ":%d+$") then
-		return nil, translate("Address and port must be specified!")
-	end
-	return Value.validate(self, value, section)
-end
 
 return m
