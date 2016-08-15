@@ -18,6 +18,8 @@ PKG_MAINTAINER:=Jian Chang <aa65535@live.com>
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)
 
+PO2LMO_BIN:=$(TOPDIR)/feeds/luci/modules/luci-base/src/po2lmo
+
 include $(INCLUDE_DIR)/package.mk
 
 define Create/uci-defaults
@@ -59,7 +61,7 @@ Package/luci-app-shadowsocks-spec/description = $(call Package/openwrt-dist-luci
 
 define Build/Prepare
 	$(foreach po,$(wildcard ${CURDIR}/files/luci/i18n/*.po), \
-		po2lmo $(po) $(PKG_BUILD_DIR)/$(patsubst %.po,%.lmo,$(notdir $(po)));)
+		$(PO2LMO_BIN) $(po) $(PKG_BUILD_DIR)/$(patsubst %.po,%.lmo,$(notdir $(po)));)
 endef
 
 define Build/Configure
