@@ -83,6 +83,17 @@ Package/luci-app-redsocks2/postinst = $(call Package/openwrt-dist-luci/postinst,
 Package/luci-app-shadowvpn/postinst = $(call Package/openwrt-dist-luci/postinst,shadowvpn)
 Package/luci-app-shadowsocks-spec/postinst = $(call Package/openwrt-dist-luci/postinst,shadowsocks)
 
+define Package/openwrt-dist-luci/postrm
+#!/bin/sh
+rm -f /tmp/luci-indexcache
+exit 0
+endef
+
+Package/luci-app-chinadns/postrm = $(Package/openwrt-dist-luci/postrm)
+Package/luci-app-redsocks2/postrm = $(Package/openwrt-dist-luci/postrm)
+Package/luci-app-shadowvpn/postrm = $(Package/openwrt-dist-luci/postrm)
+Package/luci-app-shadowsocks-spec/postrm = $(Package/openwrt-dist-luci/postrm)
+
 define Package/openwrt-dist-luci/install
 	$(call Create/uci-defaults,$(2))
 	$(INSTALL_DIR) $(1)/usr/lib/lua/luci/controller
