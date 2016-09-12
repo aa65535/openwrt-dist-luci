@@ -2,12 +2,11 @@ OpenWrt-dist LuCI
 ===
 
 APP 列表
----
- > [下载预编译 IPK][0]  
 
  Name                      | Depends                  | Description
  --------------------------|--------------------------|-------------------------
  luci-app-chinadns         | [openwrt-chinadns][5]    | LuCI Support for ChinaDNS
+ luci-app-dns-forwarder    | [openwrt-dns-forwarder][6]| LuCI Support for Dns-Forwarder
  luci-app-redsocks2        | [openwrt-redsocks2][R]   | LuCI Support for RedSocks2
  luci-app-shadowvpn        | [openwrt-shadowvpn][8]   | LuCI Support for ShadowVPN
 
@@ -31,9 +30,8 @@ make menuconfig
 make package/openwrt-dist-luci/compile V=99
 ```
 
-
-  [0]: https://github.com/aa65535/openwrt-dist-luci/releases/latest
-  [5]: https://github.com/aa65535/openwrt-chinadns
-  [8]: https://github.com/aa65535/openwrt-shadowvpn
-  [R]: https://github.com/aa65535/openwrt-redsocks2
-  [S]: https://wiki.openwrt.org/doc/howto/obtain.firmware.sdk
+ [5]: https://github.com/aa65535/openwrt-chinadns
+ [6]: https://github.com/aa65535/openwrt-dns-forwarder
+ [8]: https://github.com/aa65535/openwrt-shadowvpn
+ [R]: https://github.com/aa65535/openwrt-redsocks2
+ [S]: https://wiki.openwrt.org/doc/howto/obtain.firmware.sdk
