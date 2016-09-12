@@ -46,7 +46,6 @@ endef
 Package/luci-app-chinadns = $(call Package/openwrt-dist-luci/Default,ChinaDNS,+ChinaDNS)
 Package/luci-app-redsocks2 = $(call Package/openwrt-dist-luci/Default,RedSocks2,+redsocks2)
 Package/luci-app-shadowvpn = $(call Package/openwrt-dist-luci/Default,ShadowVPN,+ShadowVPN)
-Package/luci-app-shadowsocks-spec = $(call Package/openwrt-dist-luci/Default,shadowsocks-libev-spec, +shadowsocks-libev-spec)
 
 define Package/openwrt-dist-luci/description
 	LuCI Support for $(1).
@@ -55,7 +54,6 @@ endef
 Package/luci-app-chinadns/description = $(call Package/openwrt-dist-luci/description,ChinaDNS)
 Package/luci-app-redsocks2/description = $(call Package/openwrt-dist-luci/description,RedSocks2)
 Package/luci-app-shadowvpn/description = $(call Package/openwrt-dist-luci/description,ShadowVPN)
-Package/luci-app-shadowsocks-spec/description = $(call Package/openwrt-dist-luci/description,shadowsocks-libev-spec)
 
 define Build/Prepare
 	$(foreach po,$(wildcard ${CURDIR}/files/luci/i18n/*.po), \
@@ -81,7 +79,6 @@ endef
 Package/luci-app-chinadns/postinst = $(call Package/openwrt-dist-luci/postinst,chinadns)
 Package/luci-app-redsocks2/postinst = $(call Package/openwrt-dist-luci/postinst,redsocks2)
 Package/luci-app-shadowvpn/postinst = $(call Package/openwrt-dist-luci/postinst,shadowvpn)
-Package/luci-app-shadowsocks-spec/postinst = $(call Package/openwrt-dist-luci/postinst,shadowsocks)
 
 define Package/openwrt-dist-luci/postrm
 #!/bin/sh
@@ -92,7 +89,6 @@ endef
 Package/luci-app-chinadns/postrm = $(Package/openwrt-dist-luci/postrm)
 Package/luci-app-redsocks2/postrm = $(Package/openwrt-dist-luci/postrm)
 Package/luci-app-shadowvpn/postrm = $(Package/openwrt-dist-luci/postrm)
-Package/luci-app-shadowsocks-spec/postrm = $(Package/openwrt-dist-luci/postrm)
 
 define Package/openwrt-dist-luci/install
 	$(call Create/uci-defaults,$(2))
@@ -110,19 +106,6 @@ Package/luci-app-chinadns/install = $(call Package/openwrt-dist-luci/install,$(1
 Package/luci-app-redsocks2/install = $(call Package/openwrt-dist-luci/install,$(1),redsocks2)
 Package/luci-app-shadowvpn/install = $(call Package/openwrt-dist-luci/install,$(1),shadowvpn)
 
-define Package/luci-app-shadowsocks-spec/install
-	$(call Create/uci-defaults,shadowsocks)
-	$(INSTALL_DIR) $(1)/usr/lib/lua/luci/controller
-	$(INSTALL_DATA) ./files/luci/controller/shadowsocks.lua $(1)/usr/lib/lua/luci/controller/shadowsocks.lua
-	$(INSTALL_DIR) $(1)/usr/lib/lua/luci/i18n
-	$(INSTALL_DATA) $(PKG_BUILD_DIR)/shadowsocks.*.lmo $(1)/usr/lib/lua/luci/i18n/
-	$(INSTALL_DIR) $(1)/usr/lib/lua/luci/model/cbi/shadowsocks
-	$(INSTALL_DATA) ./files/luci/model/cbi/shadowsocks/*.lua $(1)/usr/lib/lua/luci/model/cbi/shadowsocks/
-	$(INSTALL_DIR) $(1)/etc/uci-defaults
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/luci-shadowsocks $(1)/etc/uci-defaults/luci-shadowsocks
-endef
-
 $(eval $(call BuildPackage,luci-app-chinadns))
 $(eval $(call BuildPackage,luci-app-redsocks2))
 $(eval $(call BuildPackage,luci-app-shadowvpn))
-$(eval $(call BuildPackage,luci-app-shadowsocks-spec))
