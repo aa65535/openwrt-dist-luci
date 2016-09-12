@@ -4,12 +4,6 @@ msgstr "Content-Type: text/plain; charset=UTF-8\n"
 msgid "Also filter results inside China from foreign DNS servers"
 msgstr "同时过滤从国外DNS返回的IP为国内的结果"
 
-msgid "ChinaDNS is not running"
-msgstr "ChinaDNS 未运行"
-
-msgid "ChinaDNS is running"
-msgstr "ChinaDNS 运行中"
-
 msgid "ChinaDNS"
 msgstr "ChinaDNS"
 
@@ -27,6 +21,12 @@ msgstr "基本设置"
 
 msgid "Local Port"
 msgstr "本地端口"
+
+msgid "NOT RUNNING"
+msgstr "未运行"
+
+msgid "RUNNING"
+msgstr "运行中"
 
 msgid "Upstream Servers"
 msgstr "上游服务器"

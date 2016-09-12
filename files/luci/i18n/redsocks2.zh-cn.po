@@ -16,6 +16,9 @@ msgstr "基本设置"
 msgid "Local Port"
 msgstr "本地端口"
 
+msgid "NOT RUNNING"
+msgstr "未运行"
+
 msgid "Proxy IP"
 msgstr "代理 IP"
 
@@ -25,14 +28,11 @@ msgstr "代理端口"
 msgid "Proxy Type"
 msgstr "代理类型"
 
+msgid "RUNNING"
+msgstr "运行中"
+
 msgid "RedSocks2"
 msgstr "RedSocks2"
-
-msgid "RedSocks2 is running"
-msgstr "RedSocks2 运行中"
-
-msgid "RedSocks2 is not running"
-msgstr "RedSocks2 未运行"
 
 msgid "Wait Timeout"
 msgstr "等待超时"
