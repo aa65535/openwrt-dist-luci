@@ -1,6 +1,8 @@
 OpenWrt-dist LuCI
 ===
 
+ [![Download][B]][2]
+
 APP 列表
 
  Name                      | Depends                  | Description
@@ -30,6 +32,9 @@ make menuconfig
 make package/openwrt-dist-luci/compile V=99
 ```
 
+
+ [B]: https://img.shields.io/github/release/aa65535/openwrt-dist-luci.svg
+ [2]: https://github.com/aa65535/openwrt-dist-luci/releases/latest
  [5]: https://github.com/aa65535/openwrt-chinadns
  [6]: https://github.com/aa65535/openwrt-dns-forwarder
  [8]: https://github.com/aa65535/openwrt-shadowvpn
