@@ -10,6 +10,9 @@ msgstr "上游 DNS"
 msgid "Enable"
 msgstr "启用"
 
+msgid "General Setting"
+msgstr "基本设置"
+
 msgid "Listen Address"
 msgstr "监听地址"
 
