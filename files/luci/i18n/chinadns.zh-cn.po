@@ -2,7 +2,7 @@ msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8\n"
 
 msgid "Also filter results inside China from foreign DNS servers"
-msgstr "同时过滤从国外DNS返回的IP为国内的结果"
+msgstr "同时过滤从国外 DNS 返回的 IP 为国内的结果"
 
 msgid "ChinaDNS"
 msgstr "ChinaDNS"
@@ -32,4 +32,4 @@ msgid "Upstream Servers"
 msgstr "上游服务器"
 
 msgid "Use commas to separate multiple ip address"
-msgstr "多个IP地址使用逗号隔开"
+msgstr "多个 IP 地址使用逗号隔开"

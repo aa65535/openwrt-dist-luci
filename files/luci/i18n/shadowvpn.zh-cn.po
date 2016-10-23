@@ -26,7 +26,7 @@ msgid "NOT RUNNING"
 msgstr "未运行"
 
 msgid "Override MTU"
-msgstr "设置MTU"
+msgstr "设置 MTU"
 
 msgid "Password"
 msgstr "密码"
@@ -53,4 +53,4 @@ msgid "ShadowVPN"
 msgstr "ShadowVPN"
 
 msgid "User Token"
-msgstr "用户令牌"
+msgstr "用户口令"
