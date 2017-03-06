@@ -29,9 +29,8 @@ o.datatype    = "ipaddr"
 o.rmempty     = false
 
 o = s:option(Value, "dns_servers", translate("DNS Server"))
-o.placeholder = "8.8.8.8"
-o.default     = "8.8.8.8"
-o.datatype    = "ipaddr"
+o.placeholder = "8.8.8.8:53"
+o.default     = "8.8.8.8:53"
 o.rmempty     = false
 
 return m
