@@ -26,7 +26,7 @@ msgid "NOT RUNNING"
 msgstr "未运行"
 
 msgid "Override MTU"
-msgstr "设置MTU"
+msgstr "设置 MTU"
 
 msgid "Password"
 msgstr "密码"
