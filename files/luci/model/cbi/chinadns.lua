@@ -21,10 +21,16 @@ o = s:option(Flag, "bidirectional",
 	translate("Also filter results inside China from foreign DNS servers"))
 o.rmempty     = false
 
-o = s:option(Value, "port", translate("Local Port"))
+o = s:option(Value, "port", translate("Listen Port"))
 o.placeholder = 5353
 o.default     = 5353
 o.datatype    = "port"
+o.rmempty     = false
+
+o = s:option(Value, "addr", translate("Listen Address"))
+o.placeholder = "0.0.0.0"
+o.default     = "0.0.0.0"
+o.datatype    = "ipaddr"
 o.rmempty     = false
 
 o = s:option(Value, "chnroute", translate("CHNRoute File"))

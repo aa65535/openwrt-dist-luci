@@ -19,8 +19,11 @@ msgstr "启用"
 msgid "General Setting"
 msgstr "基本设置"
 
-msgid "Local Port"
-msgstr "本地端口"
+msgid "Listen Address"
+msgstr "监听地址"
+
+msgid "Listen Port"
+msgstr "监听端口"
 
 msgid "NOT RUNNING"
 msgstr "未运行"
