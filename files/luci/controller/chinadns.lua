@@ -9,5 +9,9 @@ function index()
 		return
 	end
 
-	entry({"admin", "services", "chinadns"}, cbi("chinadns"), _("ChinaDNS"), 70).dependent = true
+	page = entry({"admin", "services", "chinadns"},
+		cbi("chinadns"),
+		_("ChinaDNS"), 70)
+	page.dependent = true
+	page.acl_depends = { "luci-app-chinadns" }
 end
