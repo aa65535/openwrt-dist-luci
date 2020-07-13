@@ -1,0 +1,11 @@
+{
+	"luci-app-redsocks2": {
+		"description": "Grant access to LuCI RedSocks2",
+		"read": {
+			"uci": [ "redsocks2" ]
+		},
+		"write": {
+			"uci": [ "redsocks2" ]
+		}
+	}
+}

@@ -1,0 +1,11 @@
+{
+	"luci-app-shadowvpn": {
+		"description": "Grant access to LuCI ShadowVPN",
+		"read": {
+			"uci": [ "shadowvpn" ]
+		},
+		"write": {
+			"uci": [ "shadowvpn" ]
+		}
+	}
+}

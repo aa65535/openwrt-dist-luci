@@ -1,0 +1,11 @@
+{
+	"luci-app-chinadns": {
+		"description": "Grant access to LuCI ChinaDNS",
+		"read": {
+			"uci": [ "chinadns" ]
+		},
+		"write": {
+			"uci": [ "chinadns" ]
+		}
+	}
+}
