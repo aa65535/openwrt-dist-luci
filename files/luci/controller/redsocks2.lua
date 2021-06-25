@@ -9,5 +9,9 @@ function index()
 		return
 	end
 
-	entry({"admin", "services", "redsocks2"}, cbi("redsocks2"), _("RedSocks2"), 72).dependent = true
+	page = entry({"admin", "services", "redsocks2"},
+		cbi("redsocks2"),
+		_("RedSocks2"), 72)
+	page.dependent = true
+	page.acl_depends = { "luci-app-redsocks2" }
 end
