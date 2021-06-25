@@ -9,5 +9,9 @@ function index()
 		return
 	end
 
-	entry({"admin", "services", "dns-forwarder"}, cbi("dns-forwarder"), _("DNS-Forwarder"), 60).dependent = true
+	page = entry({"admin", "services", "dns-forwarder"},
+		cbi("dns-forwarder"),
+		_("DNS-Forwarder"), 60)
+	page.dependent = true
+	page.acl_depends = { "luci-app-dns-forwarder" }
 end
