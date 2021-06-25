@@ -9,5 +9,9 @@ function index()
 		return
 	end
 
-	entry({"admin", "services", "shadowvpn"}, cbi("shadowvpn"), _("ShadowVPN"), 76).dependent = true
+	page = entry({"admin", "services", "shadowvpn"},
+		cbi("shadowvpn"),
+		_("ShadowVPN"), 76)
+	page.dependent = true
+	page.acl_depends = { "luci-app-shadowvpn" }
 end
